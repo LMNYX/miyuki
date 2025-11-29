@@ -34,6 +34,11 @@ html, body
 .status-group
 {
     margin: 48px 0;
+
+    h2
+    {
+        user-select: none;
+    }
 }
 
 @media (max-width: 1250px) {

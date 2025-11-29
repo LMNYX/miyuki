@@ -13,9 +13,7 @@
       </div>
       <div class="statuses">
         
-        <div class="status-group">
-          <h2>🇵🇱 Poland</h2>
-          
+        <StatusGroup title="🇵🇱 Poland">          
           <div class="status-box">
             <div class="header">
               <div class="title">
@@ -160,10 +158,9 @@
             </div>
           </div>
 
-        </div>
+        </StatusGroup>
 
-        <div class="status-group">
-          <h2>🇷🇴 Romania</h2>
+        <StatusGroup title="🇷🇴 Romania">
           
           <div class="status-box">
             <div class="header">
@@ -237,7 +234,7 @@
             </div>
           </div>
 
-        </div>
+        </StatusGroup>
       </div>
       
 
