@@ -4,7 +4,7 @@
       <div class="header">
         <div class="status-title">
           <h1>Status page</h1>
-          <UptimeIndicator status="operational" />
+          <UptimeIndicator status="partially-out" />
         </div>
         <div class="status-info">
           <h1 class="tiny-font">99.99%</h1>
@@ -22,7 +22,7 @@
                 <span>Email</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
               </div>
               <div class="status">
-                <UptimeIndicator />
+                <UptimeIndicator status="operational" />
               </div>
             </div>
             <div class="status-monitors">
@@ -94,7 +94,7 @@
                 <span>VPN</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
               </div>
               <div class="status">
-                <UptimeIndicator />
+                <UptimeIndicator status="operational" />
               </div>
             </div>
             <div class="status-monitors">
@@ -171,7 +171,7 @@
                 <span>VPN</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
               </div>
               <div class="status">
-                <UptimeIndicator />
+                <UptimeIndicator status="completely-out" />
               </div>
             </div>
             <div class="status-monitors">

@@ -1,7 +1,7 @@
 <template>
-  <div class="uptime-indicator operational">
+  <div class="uptime-indicator" :class="props.status">
     <div class="box" />
-    <span class="status tiny-font" :class="status" />
+    <span class="status tiny-font" />
   </div>
 </template>
 
