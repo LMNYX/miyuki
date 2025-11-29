@@ -19,6 +19,10 @@ Opinionated uptime monitor & status page.
 - [ ] gRPC
 - [ ] socket.io
 
+## Screenshots
+
+<img src="https://uwu.so/eemxA1ZqQki">
+
 ## Setup
 
 Make sure to install dependencies:
