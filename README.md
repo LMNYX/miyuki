@@ -4,6 +4,21 @@
 
 Opinionated uptime monitor & status page.
 
+## Features
+
+- [ ] Status page / Uptime monitor
+- [ ] Alerts
+- [ ] Maintenance
+- [ ] Incidents
+
+### Supported methods
+
+- [ ] HTTP
+- [ ] HTTPS
+- [ ] WebSocket
+- [ ] gRPC
+- [ ] socket.io
+
 ## Setup
 
 Make sure to install dependencies:
