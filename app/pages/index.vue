@@ -14,12 +14,12 @@
       <div class="statuses">
         
         <div class="status-group">
-          <h2>Group Header</h2>
+          <h2>🇵🇱 Poland</h2>
           
           <div class="status-box">
             <div class="header">
               <div class="title">
-                <span>Server 1</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
+                <span>Email</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
               </div>
               <div class="status">
                 <UptimeIndicator />
@@ -91,7 +91,7 @@
           <div class="status-box">
             <div class="header">
               <div class="title">
-                <span>Server 2</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
+                <span>VPN</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
               </div>
               <div class="status">
                 <UptimeIndicator />
@@ -161,7 +161,85 @@
           </div>
 
         </div>
+
+        <div class="status-group">
+          <h2>🇷🇴 Romania</h2>
+          
+          <div class="status-box">
+            <div class="header">
+              <div class="title">
+                <span>VPN</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
+              </div>
+              <div class="status">
+                <UptimeIndicator />
+              </div>
+            </div>
+            <div class="status-monitors">
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor partially-out" />
+              <div class="monitor partially-out" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor partially-out" />
+              <div class="monitor partially-out" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor operational" />
+              <div class="monitor partially-out" />
+              <div class="monitor partially-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+              <div class="monitor completely-out" />
+            </div>
+          </div>
+
+        </div>
       </div>
+      
 
       <!-- footer -->
       <div class="footer">
