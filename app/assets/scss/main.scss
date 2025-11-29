@@ -1,7 +1,315 @@
+$uptime-unknown: rgb(255, 255, 255);
+$uptime-unknown-shadow: rgba(255, 255, 255, 0.45);
+$uptime-up: rgb(78, 250, 55);
+$uptime-up-shadow: rgba(78, 250, 55, 0.45);
+$uptime-partial: rgb(230, 250, 55);
+$uptime-partial-shadow: rgba(230, 250, 55, 0.45);
+$uptime-complete: rgb(250, 55, 55);
+$uptime-complete-shadow: rgba(250, 55, 55, 0.45);
+$uptime-maintenance: rgb(55, 117, 250);
+$uptime-maintenance-shadow: rgba(55, 117, 250, 0.45);
+
 html, body
 {
     padding: 0;
     margin: 0;
 
     background: rgb(20, 20, 20);
+}
+
+*
+{
+    font-family: 'DotGothic16';
+    font-smooth: never;
+    -webkit-font-smoothing : none;
+
+    color: #d2d2d2;
+}
+
+::selection
+{
+    background: rgba(34, 34, 34, 0.6);
+}
+
+.status-page
+{
+    width: 40%;
+    margin: 48px auto;
+
+    .header
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 1;
+        margin-bottom: 48px;
+        flex-wrap: wrap;
+        
+        div.status-info, div.status-title
+        {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+            h1
+            {
+                margin: 0;
+                padding: 0;
+            }
+
+            &.status-info
+            {
+                text-align: right;
+
+                h1
+                {
+                    margin-top: 10px !important;
+                }
+
+                p
+                {
+                    color: rgb(158, 158, 158);
+                }
+                
+                h1, p
+                {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    .uptime-indicator
+    {
+        display: inline-block !important;
+        padding: 2px 4px;
+        border-radius: 9999px;
+
+        vertical-align: middle;
+
+        .span
+        {
+            vertical-align: middle;
+        }
+
+        & > .status::before
+        {
+            content: 'unknown';
+        }
+
+        &.operational
+        {
+            & > .box
+            {
+                background: $uptime-up;
+                box-shadow: 0 0 10px 1px $uptime-up-shadow;
+                -webkit-box-shadow: 0 0 10px 1px $uptime-up-shadow;
+                -moz-box-shadow: 0 0 10px 1px $uptime-up-shadow;
+            }
+
+            & > .status::before
+            {
+                content: 'operational';
+                color: $uptime-up;
+                text-shadow: $uptime-up-shadow 1px 0 10px;
+            }
+        }
+
+        &.partially-out
+        {
+            & > .box
+            {
+                background: $uptime-partial;
+                box-shadow: 0 0 10px 1px $uptime-partial-shadow;
+                -webkit-box-shadow: 0 0 10px 1px $uptime-partial-shadow;
+                -moz-box-shadow: 0 0 10px 1px $uptime-partial-shadow;
+            }
+
+            & > .status::before
+            {
+                content: 'partial outage';
+                color: $uptime-partial;
+                text-shadow: $uptime-partial-shadow 1px 0 10px;
+            }
+        }
+
+        &.completely-out
+        {
+            & > .box
+            {
+                background: $uptime-complete;
+                box-shadow: 0 0 10px 1px $uptime-complete-shadow;
+                -webkit-box-shadow: 0 0 10px 1px $uptime-complete-shadow;
+                -moz-box-shadow: 0 0 10px 1px $uptime-complete-shadow;
+            }
+
+            & > .status::before
+            {
+                content: 'complete outage';
+                color: $uptime-complete;
+                text-shadow: $uptime-complete-shadow 1px 0 10px;
+            }
+        }
+
+        &.maintenance
+        {
+            & > .box
+            {
+                background: $uptime-maintenance;
+                box-shadow: 0 0 10px 1px $uptime-maintenance-shadow;
+                -webkit-box-shadow: 0 0 10px 1px $uptime-maintenance-shadow;
+                -moz-box-shadow: 0 0 10px 1px $uptime-maintenance-shadow;
+            }
+
+            & > .status::before
+            {
+                content: 'maintenance';
+                color: $uptime-maintenance;
+                text-shadow: $uptime-maintenance-shadow 1px 0 10px;
+            }
+        }
+
+        .box
+        {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(255,255,255,0.6);
+            background: $uptime-unknown;
+            box-shadow: 0 0 10px 1px $uptime-unknown-shadow;
+            -webkit-box-shadow: 0 0 10px 1px $uptime-unknown-shadow;
+            -moz-box-shadow: 0 0 10px 1px $uptime-unknown-shadow;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+    }
+}
+
+.tiny-font
+{
+    font-family: 'Tiny5';
+}
+
+.status-box {
+    width: 100%;
+    border: 1px solid rgba(255,255,255, 0.2);
+    border-radius: 0.5rem;
+
+    margin: 0.75rem 0;
+
+    transition: 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        background: rgba(255,255,255,0.02);
+    }
+
+    .status-monitors {
+        padding: 1rem;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        flex-wrap: nowrap;
+
+        flex-shrink: 1;
+        gap: 0.25rem;
+        overflow: hidden;
+
+        .monitor {
+            display: block;
+            height: 2rem;
+            width: 0.5rem;
+
+            background: rgb(112, 112, 112);
+            border-radius: 0.25rem;
+            flex: 1 1 0;
+            min-width: 0;
+
+            transition: 0.1s;
+            box-sizing: border-box;
+
+            &:hover {
+                transform: translateY(-0.125rem);
+            }
+
+            &.operational {
+                background: $uptime-up;
+                box-shadow: 0 0 0.625rem 0.0625rem $uptime-up-shadow;
+                -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-up-shadow;
+                -moz-box-shadow: 0 0 0.625rem 0.0625rem $uptime-up-shadow;
+            }
+
+            &.partially-out {
+                background: $uptime-partial;
+                box-shadow: 0 0 0.625rem 0.0625rem $uptime-partial-shadow;
+                -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-partial-shadow;
+                -moz-box-shadow: 0 0 0.625rem 0.0625rem $uptime-partial-shadow;
+            }
+
+            &.completely-out {
+                background: $uptime-complete;
+                box-shadow: 0 0 0.625rem 0.0625rem $uptime-complete-shadow;
+                -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-complete-shadow;
+                -moz-box-shadow: 0 0 0.625rem 0.0625rem $uptime-complete-shadow;
+            }
+
+            &.maintenance {
+                background: $uptime-maintenance;
+                box-shadow: 0 0 0.625rem 0.0625rem $uptime-maintenance-shadow;
+                -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-maintenance-shadow;
+                -moz-box-shadow: 0 0 0.625rem 0.0625rem $uptime-maintenance-shadow;
+            }
+        }
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        border-bottom: 1px solid rgba(255,255,255, 0.2);
+
+        vertical-align: middle;
+        margin-bottom: 0 !important;
+
+        .title,
+        .status {
+            padding: 1rem;
+            vertical-align: middle;
+            flex: 1;
+
+            .server-uptime-info {
+                user-select: none;
+                margin: 0 1rem;
+                color: rgb(112, 112, 112);
+            }
+        }
+
+        .status {
+            transform: translateY(-0.125rem);
+            text-align: right;
+        }
+    }
+}
+
+
+.footer
+{
+    margin: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span
+    {
+        color: rgb(131, 131, 131);
+
+        a
+        {
+            text-decoration: none;
+        }
+    }
 }
