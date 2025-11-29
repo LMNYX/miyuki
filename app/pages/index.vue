@@ -165,13 +165,17 @@
 
       <!-- footer -->
       <div class="footer">
-        <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a></span></div>
+        <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+const {data: versionData} = await useFetch('/api/version');
+
+console.log(versionData);
+
 useHead({
   title: "status"
 });
