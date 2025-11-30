@@ -25,72 +25,24 @@ Opinionated uptime monitor & status page.
 
 ## Setup
 
-Make sure to install dependencies:
+For the ease of deployment <b>Miyuki</b> uses Docker. Be sure it's installed on your machine with compose plugin.
 
-```bash
-# npm
-npm install
+### Production
 
-# pnpm
-pnpm install
+1. Clone the repository
 
-# yarn
-yarn install
+`git clone git@github.com:LMNYX/miyuki.git && cd miyuki`
 
-# bun
-bun install
-```
+2. Build and run the image
 
-## Development Server
+`docker compose up -d`
 
-Start the development server on `http://localhost:3000`:
+### Development
 
-```bash
-# npm
-npm run dev
+1. Clone the repository
 
-# pnpm
-pnpm dev
+`git clone git@github.com:LMNYX/miyuki.git && cd miyuki`
 
-# yarn
-yarn dev
+2. Build and run the development image with HMR
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+`docker-compose -f docker-compose.dev.yml up`
