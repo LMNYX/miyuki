@@ -13,227 +13,13 @@
       </div>
       <div class="statuses">
         
-        <StatusGroup title="🇵🇱 Poland">          
-          <div class="status-box">
-            <div class="header">
-              <div class="title">
-                <span>Email</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
-              </div>
-              <div class="status">
-                <UptimeIndicator status="operational" />
-              </div>
-            </div>
-            <div class="status-monitors">
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-            </div>
-          </div>
-
-          <div class="status-box">
-            <div class="header">
-              <div class="title">
-                <span>VPN</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
-              </div>
-              <div class="status">
-                <UptimeIndicator status="operational" />
-              </div>
-            </div>
-            <div class="status-monitors">
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-            </div>
-          </div>
-
+        <StatusGroup title="🇵🇱 Poland">
+          <StatusBox title="Email" :uptime="testUptime" :status="Status.OPERATIONAL" :data="testData" />
+          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="testData" />
         </StatusGroup>
 
         <StatusGroup title="🇷🇴 Romania">
-          
-          <div class="status-box">
-            <div class="header">
-              <div class="title">
-                <span>VPN</span> <span class="tiny-font server-uptime-info">99.9% uptime</span>
-              </div>
-              <div class="status">
-                <UptimeIndicator status="completely-out" />
-              </div>
-            </div>
-            <div class="status-monitors">
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor operational" />
-              <div class="monitor partially-out" />
-              <div class="monitor partially-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-              <div class="monitor completely-out" />
-            </div>
-          </div>
-
+          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="testData" />
         </StatusGroup>
       </div>
       
@@ -247,6 +33,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Status, DayStatusData } from '~/utils/status';
 const {data: versionData} = await useFetch('/api/version');
 
 console.log(versionData);
@@ -254,5 +41,36 @@ console.log(versionData);
 useHead({
   title: "status"
 });
+
+let testUptime: Number = 0.9933449;
+
+const testData = [
+  {
+    date: new Date("2025-10-10"),
+    status: Status.OPERATIONAL,
+    comment: "All systems operational"
+  },
+  {
+    date: new Date("2025-10-09"),
+    status: Status.PARTIALLY_OUT,
+    comment: "Partial outage in region <a href='/#222'>#222</a>"
+  },
+  {
+    date: new Date("2025-10-08"),
+    status: Status.COMPLETELY_OUT,
+    comment: "Major service disruption"
+  },
+  {
+    date: new Date("2025-10-07"),
+    status: Status.OPERATIONAL,
+    comment: "Recovered"
+  },
+  {
+    date: new Date("2025-10-06"),
+    status: Status.OPERATIONAL,
+    comment: "All systems operational"
+  }
+];
+
 
 </script>
