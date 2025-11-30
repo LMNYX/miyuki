@@ -2,7 +2,7 @@
 
 <h1 align="center">Miyuki</h1>
 
-Opinionated uptime monitor & status page.
+Free and Open-source silly opinionated uptime monitor & status page with zero to none slop.
 
 ## Features
 
