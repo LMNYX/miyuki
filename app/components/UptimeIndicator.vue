@@ -1,6 +1,6 @@
 <template>
   <div class="uptime-indicator" :class="props.status">
-    <div class="box" />
+    <div class="box glow" />
     <span class="status tiny-font" />
   </div>
 </template>

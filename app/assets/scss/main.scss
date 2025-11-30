@@ -126,6 +126,7 @@ html, body
         {
             & > .box
             {
+                --pulse-color: #{$uptime-up-shadow};
                 background: $uptime-up;
                 box-shadow: 0 0 10px 1px $uptime-up-shadow;
                 -webkit-box-shadow: 0 0 10px 1px $uptime-up-shadow;
@@ -144,6 +145,7 @@ html, body
         {
             & > .box
             {
+                --pulse-color: #{$uptime-partial-shadow};
                 background: $uptime-partial;
                 box-shadow: 0 0 10px 1px $uptime-partial-shadow;
                 -webkit-box-shadow: 0 0 10px 1px $uptime-partial-shadow;
@@ -162,6 +164,7 @@ html, body
         {
             & > .box
             {
+                --pulse-color: #{$uptime-complete-shadow};
                 background: $uptime-complete;
                 box-shadow: 0 0 10px 1px $uptime-complete-shadow;
                 -webkit-box-shadow: 0 0 10px 1px $uptime-complete-shadow;
@@ -180,6 +183,7 @@ html, body
         {
             & > .box
             {
+                --pulse-color: #{$uptime-maintenance-shadow};
                 background: $uptime-maintenance;
                 box-shadow: 0 0 10px 1px $uptime-maintenance-shadow;
                 -webkit-box-shadow: 0 0 10px 1px $uptime-maintenance-shadow;
@@ -196,6 +200,7 @@ html, body
 
         .box
         {
+            --pulse-color: #{$uptime-unknown-shadow};
             display: inline-block;
             width: 8px;
             height: 8px;
@@ -206,6 +211,8 @@ html, body
             -moz-box-shadow: 0 0 10px 1px $uptime-unknown-shadow;
             vertical-align: middle;
             margin-right: 8px;
+            animation: pulse-shadow 2s infinite ease-in-out;
+            
         }
     }
 }
@@ -259,7 +266,9 @@ html, body
                 transform: translateY(-0.125rem);
             }
 
+
             &.operational {
+                --pulse-color: #{$uptime-up-shadow};
                 background: $uptime-up;
                 box-shadow: 0 0 0.625rem 0.0625rem $uptime-up-shadow;
                 -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-up-shadow;
@@ -267,6 +276,7 @@ html, body
             }
 
             &.partially-out {
+                --pulse-color: #{$uptime-partial-shadow};
                 background: $uptime-partial;
                 box-shadow: 0 0 0.625rem 0.0625rem $uptime-partial-shadow;
                 -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-partial-shadow;
@@ -274,6 +284,7 @@ html, body
             }
 
             &.completely-out {
+                --pulse-color: #{$uptime-complete-shadow};
                 background: $uptime-complete;
                 box-shadow: 0 0 0.625rem 0.0625rem $uptime-complete-shadow;
                 -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-complete-shadow;
@@ -281,10 +292,16 @@ html, body
             }
 
             &.maintenance {
+                --pulse-color: #{$uptime-maintenance-shadow};
                 background: $uptime-maintenance;
                 box-shadow: 0 0 0.625rem 0.0625rem $uptime-maintenance-shadow;
                 -webkit-box-shadow: 0 0 0.625rem 0.0625rem $uptime-maintenance-shadow;
                 -moz-box-shadow: 0 0 0.625rem 0.0625rem $uptime-maintenance-shadow;
+            }
+
+            &.glow
+            {
+                animation: pulse-shadow 2s infinite ease-in-out;
             }
         }
     }
@@ -450,4 +467,10 @@ html, body
 }
 .a--slidein:nth-child(4) {
   animation-delay: 0.6s;
+}
+
+@keyframes pulse-shadow {
+  0%   { box-shadow: 0 0 0.5rem 0.05rem var(--pulse-color); }
+  50%  { box-shadow: 0 0 0.8rem 0.15rem var(--pulse-color); }
+  100% { box-shadow: 0 0 0.5rem 0.05rem var(--pulse-color); }
 }

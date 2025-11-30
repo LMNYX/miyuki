@@ -6,6 +6,7 @@
       :status="mapStatus(entry.status)"
       :tooltip-content="entry.comment"
       :date="formatDate(entry.date)"
+      :is-glowing="index === normalizedData.length - 1"
     />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <TooltipProvider>
     <TooltipRoot>
-      <TooltipTrigger as="div" class="monitor" :class="props.status ?? 'unknown'">
+      <TooltipTrigger as="div" class="monitor" :class="[props.status ?? 'unknown', { glow: props.isGlowing }]">
       </TooltipTrigger>
       <TooltipPortal>
         <TooltipContent class="TooltipContent">
@@ -22,7 +22,8 @@ import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRo
 const props = defineProps({
   date: String,
   tooltipContent: String,
-  status: String
+  status: String,
+  isGlowing: Boolean
 })
 
 </script>

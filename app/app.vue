@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-
 let websiteTitle = "miyuki";
 
 useHead({

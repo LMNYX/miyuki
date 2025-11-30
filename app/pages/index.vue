@@ -67,10 +67,9 @@ const testData = [
   },
   {
     date: new Date("2025-10-06"),
-    status: Status.OPERATIONAL,
+    status: Status.COMPLETELY_OUT,
     comment: "All systems operational"
   }
 ];
-
 
 </script>
