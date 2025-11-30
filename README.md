@@ -1,4 +1,4 @@
-<p align="center"><img src="https://uwu.so/eemTcWBS3Ld"></p>
+<p align="center"><img src="https://media1.tenor.com/m/HsA7Tx83EskAAAAC/miyuki-takara-lucky-star.gif"></p>
 
 <h1 align="center">Miyuki</h1>
 
