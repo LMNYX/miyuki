@@ -20,11 +20,5 @@ const props = defineProps<{ data: DayStatusData[], uptime: Number, title: String
 </script>
 
 <style lang="scss" scoped>
-.title
-{
-  span
-  {
-    vertical-align: middle;
-  }
-}
+
 </style>
