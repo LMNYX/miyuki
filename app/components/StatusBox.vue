@@ -19,6 +19,12 @@ import type { Status, DayStatusData, mapStatus } from '~/utils/status';
 const props = defineProps<{ data: DayStatusData[], uptime: Number, title: String, status: Status }>();
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.title
+{
+  span
+  {
+    vertical-align: middle;
+  }
+}
 </style>
