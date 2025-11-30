@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtPage class="main" />
+    <NuxtPage class="page" />
   </div>
 </template>
 
@@ -11,3 +11,14 @@ useHead({
   titleTemplate: `${websiteTitle} - %s`
 });
 </script>
+<style lang="scss">
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.21s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>

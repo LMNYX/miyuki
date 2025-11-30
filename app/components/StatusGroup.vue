@@ -54,11 +54,13 @@ function toggleDisplay() {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .2s
+  transition: all 0.21s;
 }
-
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
-    opacity: 0
+  opacity: 0;
+  transform: scaleY(0.5);
+  filter: blur(2rem);
+  height: 0;
 }
 </style>

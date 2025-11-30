@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     rootTag: 'div',
     rootId: 'app',
     buildAssetsDir: '_assets',
+    pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       titleTemplate: "%s",
       charset: 'utf-16',

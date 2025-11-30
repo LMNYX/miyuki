@@ -14,18 +14,18 @@
       <div class="statuses">
         
         <StatusGroup title="🇵🇱 Poland">
-          <StatusBox title="Email" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...generateRandomTestData()]" />
-          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="[...generateRandomTestData()]" />
+          <StatusBox title="Email" :uptime="testUptime" :status="Status.OPERATIONAL" slug="pl-email" :data="[...generateRandomTestData()]" />
+          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" slug="pl-vpn" :data="[...generateRandomTestData()]" />
         </StatusGroup>
 
         <StatusGroup title="🇷🇴 Romania">
-          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="[...generateRandomTestData()]" />
+          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" slug="ro-vpn" :data="[...generateRandomTestData()]" />
         </StatusGroup>
 
         <StatusGroup title="🇸🇪 Sweden">
-          <StatusBox title="uwu.so" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...generateRandomTestData()]" />
-          <StatusBox title="thighs.moe" :uptime="testUptime" :status="Status.COMPLETELY_OUT" :data="[...generateRandomTestData()]" />
-          <StatusBox title="mishashto.com" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...generateRandomTestData()]" />
+          <StatusBox title="uwu.so" :uptime="testUptime" :status="Status.OPERATIONAL" slug="uwu-so" :data="[...generateRandomTestData()]" />
+          <StatusBox title="thighs.moe" :uptime="testUptime" :status="Status.COMPLETELY_OUT" slug="thighs-moe" :data="[...generateRandomTestData()]" />
+          <StatusBox title="mishashto.com" :uptime="testUptime" :status="Status.OPERATIONAL" slug="mishashto-com" :data="[...generateRandomTestData()]" />
         </StatusGroup>
       </div>
       <!-- footer -->
