@@ -5,7 +5,7 @@
       <div v-if="shown" class="collapsible-content">
         <slot />
       </div>
-      <div v-else class="collapsed-data" @click="toggleDisplay"><span>Collapsed, but still</span> <UptimeIndicator status="operational" /><span>!</span></div>
+      <div v-else class="collapsed-data" @click="toggleDisplay"><span>You've hidden this group, but it seems that it's</span> <UptimeIndicator status="operational" /><span>!</span></div>
     </transition>
   </div>
 </template>

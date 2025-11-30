@@ -14,12 +14,18 @@
       <div class="statuses">
         
         <StatusGroup title="🇵🇱 Poland">
-          <StatusBox title="Email" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...testData]" />
-          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="[...testData]" />
+          <StatusBox title="Email" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...generateRandomTestData()]" />
+          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="[...generateRandomTestData()]" />
         </StatusGroup>
 
         <StatusGroup title="🇷🇴 Romania">
-          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="[...testData]" />
+          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" :data="[...generateRandomTestData()]" />
+        </StatusGroup>
+
+        <StatusGroup title="🇸🇪 Sweden">
+          <StatusBox title="uwu.so" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...generateRandomTestData()]" />
+          <StatusBox title="thighs.moe" :uptime="testUptime" :status="Status.COMPLETELY_OUT" :data="[...generateRandomTestData()]" />
+          <StatusBox title="mishashto.com" :uptime="testUptime" :status="Status.OPERATIONAL" :data="[...generateRandomTestData()]" />
         </StatusGroup>
       </div>
       <!-- footer -->
@@ -32,8 +38,11 @@
 
 <script lang="ts" setup>
 import { Status, DayStatusData } from '~/utils/status';
+import { generateRandomTestData } from '~/utils/testData';
 const {data: versionData} = await useFetch('/api/version');
 
+let { filter } = useRoute().query;
+console.log(filter);
 console.log(versionData);
 
 useHead({
@@ -71,5 +80,8 @@ const testData = [
     comment: "All systems operational"
   }
 ];
+
+
+
 
 </script>
