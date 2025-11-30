@@ -1,0 +1,15 @@
+services:
+  web:
+    container_name: miyuki-web
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    build: .
+  mongo:
+    image: mongo:5.0.2
+    restart: unless-stopped
+    volumes:
+      - db:/data/db
+
+volumes:
+  db:

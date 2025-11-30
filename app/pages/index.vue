@@ -39,11 +39,12 @@
 <script lang="ts" setup>
 import { Status, DayStatusData } from '~/utils/status';
 import { generateRandomTestData } from '~/utils/testData';
-const {data: versionData} = await useFetch('/api/version');
+const appConfig = useAppConfig() 
 
+const {data: versionData} = await useFetch('/api/version');
 let { filter } = useRoute().query;
-console.log(filter);
-console.log(versionData);
+let hostname = useRequestURL().hostname;
+console.log(`GETTING DATA FOR ${hostname} ${appConfig.defaultDomain == hostname ? '(default)' : ''}`);
 
 useHead({
   title: "status"
