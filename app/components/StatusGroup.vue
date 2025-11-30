@@ -1,6 +1,6 @@
 <template>
   <div class="status-group">
-    <h2 @click="toggleDisplay">{{ props.title }}</h2>
+    <h2 class="status-title" @click="toggleDisplay">{{ props.title }}</h2>
     <transition name="fade">
       <div v-if="shown" class="collapsible-content">
         <slot />
@@ -34,6 +34,16 @@ function toggleDisplay() {
 
   * {
     vertical-align: middle;
+  }
+}
+
+.status-title
+{
+  position: relative;
+  transition: 0.2s;
+  &:hover
+  {
+    transform: translateX(8px);
   }
 }
 
