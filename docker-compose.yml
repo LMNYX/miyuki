@@ -4,7 +4,12 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongo:27017/miyuki_dev
   mongo:
     image: mongo:5.0.2
     restart: unless-stopped

@@ -19,6 +19,10 @@ export default defineNuxtConfig({
     }
   },
 
+  mongoose: {
+    uri: process.env.MONGO_URI
+  },
+
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
@@ -26,6 +30,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
-    'reka-ui/nuxt'
+    'reka-ui/nuxt',
+    'nuxt-mongoose'
   ]
 })
