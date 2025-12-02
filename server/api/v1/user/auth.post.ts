@@ -3,6 +3,17 @@ import { User } from '~~/server/models/user.schema'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
+  
+  if(!body)
+  {
+    return sendError(
+      event,
+      createError({
+        statusCode: 400,
+        statusMessage: 'Missing required parameters',
+      })
+    )
+  }
 
   let username = body.username ?? null;
   let password = body.password ?? null;
