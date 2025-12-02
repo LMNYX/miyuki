@@ -1,27 +1,34 @@
-version: "3.9"
-
 services:
   web:
     container_name: miyuki-web-dev
+    ports:
+      - 3000:3000
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile.dev
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
     environment:
       - NODE_ENV=development
-      - MONGO_URI=mongodb://mongo:27017/miyuki_dev
+      - MONGO_URI=mongodb://miyuki:reallysecurepassword@miyuki-mongo-dev:27017/miyukidb?authSource=admin
+    networks:
+      - miyuki-network
     depends_on:
       - mongo
-    command: pnpm dev --hostname 0.0.0.0
-
   mongo:
+    container_name: miyuki-mongo-dev
     image: mongo:5.0.2
     restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=miyuki
+      - MONGO_INITDB_ROOT_PASSWORD=reallysecurepassword
     volumes:
       - db:/data/db
+    networks:
+      - miyuki-network
 
 volumes:
   db:
+
+networks:
+  miyuki-network:
+    driver: bridge

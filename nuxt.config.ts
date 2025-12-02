@@ -20,7 +20,10 @@ export default defineNuxtConfig({
   },
 
   mongoose: {
-    uri: process.env.MONGO_URI
+    uri: process.env.MONGO_URI,
+    options: {
+      serverSelectionTimeoutMS: 5000
+    }
   },
 
   modules: [

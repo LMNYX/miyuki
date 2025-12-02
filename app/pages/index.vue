@@ -31,6 +31,7 @@
       <!-- footer -->
       <div class="footer">
         <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
+        <button @click="testLogin">test</button>
       </div>
     </div>
   </div>
@@ -82,7 +83,15 @@ const testData = [
   }
 ];
 
-
-
+async function testLogin()
+{
+  const res = await $fetch('/api/v1/user/auth', {
+    method: 'POST',
+    body: {
+      username: 'test',
+      password: 'test'
+    },
+  })
+}
 
 </script>

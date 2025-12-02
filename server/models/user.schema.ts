@@ -1,55 +1,36 @@
 import { defineMongooseModel } from '#nuxt/mongoose'
-import { CallbackError, Schema } from 'mongoose';
-import bcrypt from 'bcrypt';
+import { Schema, Document, CallbackError } from 'mongoose'
+import bcrypt from 'bcrypt'
 
-const _userSchema = new Schema({
-    username: {
-        type: 'string',
-        required: true
-    },
-    name: {
-        type: 'string',
-        rqeuired: true
-    },
-    password: {
-        type: 'string',
-        required: true
-    },
-    access_level: {
-        type: Number,
-        default: 0,
-        required: true
-    },
-    created_at: {
-        type: Date,
-        default: Date.now,
-        required: true
-    },
-}, { timestamps: true });
+// Make sure your global IUser interface is defined as you wrote
+// interface IUser extends Document { ... }
 
-_userSchema.pre('save', async function (next) {
-    const user = this;
-    const SALT_ROUNDS = 5;
+const UserSchema = new Schema<IUser>({
+  username: { type: String, required: true },
+  name: { type: String, required: true },
+  password: { type: String, required: true },
+  access_level: { type: Number, default: 0, required: true },
+  created_at: { type: Date, default: Date.now, required: true }
+}, { timestamps: true })
 
-    if (!user.isModified('password')) return next();
+// Hash password before save
+UserSchema.pre('save', async function(next) {
+  const user = this
+  if (!user.isModified('password')) return next()
 
-    try {
-        const salt = await bcrypt.genSalt(SALT_ROUNDS);
-        const hash = await bcrypt.hash(user.password as string, salt);
-        user.password = hash;
-        next();
-    } catch (err) {
-        next(err as CallbackError);
-    }
-});
-
-_userSchema.methods.comparePassword = async function (
-	candidatePassword: string
-): Promise<boolean> {
-	return await bcrypt.compare(candidatePassword, this.password);
-};
-
-export const UserSchema = defineMongooseModel({
-    name: 'User',
-    schema: _userSchema
+  try {
+    const salt = await bcrypt.genSalt(5)
+    user.password = await bcrypt.hash(user.password, salt)
+    next()
+  } catch (err) {
+    next(err as CallbackError)
+  }
 })
+
+// Compare candidate password with hashed password
+UserSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password)
+}
+
+// Register model with Nuxt-mongoose
+export const User = defineMongooseModel<IUser>('User', UserSchema)
