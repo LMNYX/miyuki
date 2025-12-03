@@ -3,7 +3,7 @@
     <div class="status-page">
       <div class="header">
         <div class="status-title">
-          <h1>{{ pageTitle }}</h1>
+          <h1>Status page</h1>
           <UptimeIndicator status="partially-out" />
         </div>
         <div class="status-info">
@@ -31,7 +31,6 @@
       <!-- footer -->
       <div class="footer">
         <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
-        <button @click="testLogin">test</button>
       </div>
     </div>
   </div>
@@ -42,7 +41,11 @@ import { Status, DayStatusData } from '~/utils/status';
 import { generateRandomTestData } from '~/utils/testData';
 const appConfig = useAppConfig() 
 
+const props = defineProps(['configuration']);
+
+console.log(props.configuration);
 const {data: versionData} = await useFetch('/api/version');
+
 let { filter } = useRoute().query;
 let hostname = useRequestURL().hostname;
 console.log(`GETTING DATA FOR ${hostname} ${appConfig.defaultDomain == hostname ? '(default)' : ''}`);
@@ -51,7 +54,6 @@ useHead({
   title: "status"
 });
 
-let pageTitle: String = "Status page";
 let overallUptime: Number = 0.938464;
 let testUptime: Number = 0.9933449;
 
