@@ -46,7 +46,6 @@ const appConfig = useAppConfig()
 // eslint-disable-next-line vue/require-prop-types
 const props = defineProps(['configuration']);
 
-console.log(props.configuration);
 const {data: versionData} = await useFetch('/api/version');
 
 let hostname = useRequestURL().hostname;
