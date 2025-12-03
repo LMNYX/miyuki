@@ -15,4 +15,57 @@ declare global
         key: string,
         value: any
     }
+
+    interface IHTTPAuthentication
+    {
+        username: string,
+        password: string
+    }
+
+    enum ServiceHeartbeatMethod
+    {
+        PING,
+        TCP,
+        GET,
+        POST,
+        WEBSOCKET,
+        SOCKETIO,
+        GRPC,
+        MONGODB,
+        DNS
+    }
+
+    interface IServiceHealth {
+        method: ServiceHeartbeatMethod,
+        url: string,
+        headers: string | null,
+        data: string | Object,
+        ignoreTLS: boolean,
+        heartbeatInterval: number,
+        authentication: IHTTPAuthentication
+    }
+
+    interface ITag
+    {
+        slug: string,
+        name: string
+    }
+
+    interface IService extends Document {
+        slug: string,
+        name: string,
+        displayName: string,
+        tags: ITag[],
+        healthcheck: IServiceHealth,
+    }
+
+    interface IServiceGroup
+    {
+        slug: string,
+        name: string,
+        displayName: string,
+        tags: ITag[],
+        services: IService[],
+        managers: IUser[]
+    }
 }
