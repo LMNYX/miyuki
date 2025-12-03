@@ -2,9 +2,6 @@ import { defineMongooseModel } from '#nuxt/mongoose'
 import { Schema, Document, CallbackError } from 'mongoose'
 import bcrypt from 'bcrypt'
 
-// Make sure your global IUser interface is defined as you wrote
-// interface IUser extends Document { ... }
-
 const UserSchema = new Schema<IUser>({
   username: { type: String, required: true },
   name: { type: String, required: true },
@@ -13,7 +10,6 @@ const UserSchema = new Schema<IUser>({
   created_at: { type: Date, default: Date.now, required: true }
 }, { timestamps: true })
 
-// Hash password before save
 UserSchema.pre('save', async function(next) {
   const user = this
   if (!user.isModified('password')) return next()
@@ -27,10 +23,8 @@ UserSchema.pre('save', async function(next) {
   }
 })
 
-// Compare candidate password with hashed password
 UserSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password)
 }
 
-// Register model with Nuxt-mongoose
 export const User = defineMongooseModel<IUser>('User', UserSchema)
