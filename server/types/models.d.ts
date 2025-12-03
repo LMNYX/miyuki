@@ -10,4 +10,9 @@ declare global
         created_at: Date
         comparePassword(candidatePassword: string): Promise<boolean>
     }
+
+    interface IConfiguration extends Document {
+        key: string,
+        value: any
+    }
 }
