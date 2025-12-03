@@ -37,16 +37,16 @@
 </template>
 
 <script lang="ts" setup>
-import { Status, DayStatusData } from '~/utils/status';
+import { Status } from '~/utils/status';
 import { generateRandomTestData } from '~/utils/testData';
 const appConfig = useAppConfig() 
 
+// eslint-disable-next-line vue/require-prop-types
 const props = defineProps(['configuration']);
 
 console.log(props.configuration);
 const {data: versionData} = await useFetch('/api/version');
 
-let { filter } = useRoute().query;
 let hostname = useRequestURL().hostname;
 console.log(`GETTING DATA FOR ${hostname} ${appConfig.defaultDomain == hostname ? '(default)' : ''}`);
 
@@ -54,46 +54,7 @@ useHead({
   title: "status"
 });
 
-let overallUptime: Number = 0.938464;
-let testUptime: Number = 0.9933449;
-
-const testData = [
-  {
-    date: new Date("2025-10-10"),
-    status: Status.OPERATIONAL,
-    comment: "All systems operational"
-  },
-  {
-    date: new Date("2025-10-09"),
-    status: Status.PARTIALLY_OUT,
-    comment: "Partial outage in region <a href='/#222'>#222</a>"
-  },
-  {
-    date: new Date("2025-10-08"),
-    status: Status.COMPLETELY_OUT,
-    comment: "Major service disruption"
-  },
-  {
-    date: new Date("2025-10-07"),
-    status: Status.OPERATIONAL,
-    comment: "Recovered"
-  },
-  {
-    date: new Date("2025-10-06"),
-    status: Status.COMPLETELY_OUT,
-    comment: "All systems operational"
-  }
-];
-
-async function testLogin()
-{
-  const res = await $fetch('/api/v1/user/auth', {
-    method: 'POST',
-    body: {
-      username: 'test',
-      password: 'test'
-    },
-  })
-}
+let overallUptime = 0.938464;
+let testUptime = 0.9933449;
 
 </script>
