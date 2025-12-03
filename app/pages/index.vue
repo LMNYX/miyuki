@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
     <div class="status-page">
@@ -31,6 +32,7 @@
       <!-- footer -->
       <div class="footer">
         <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
+        <div v-if="props.configuration['site.footer'] != ''" v-html="props.configuration['site.footer']" />
       </div>
     </div>
   </div>
