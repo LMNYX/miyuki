@@ -8,8 +8,8 @@ const ServiceHealthSchema = new Schema<IServiceHealth>({
     headers: { type: Schema.Types.Mixed, default: null },
     data: { type: Schema.Types.Mixed, default: null },
     ignoreTLS: { type: Boolean, default: false },
-    heartbeatInterval: { type: Number, default: 60 },
-    authentication: { type: HTTPAuthenticationSchema, required: true }
+    heartbeatInterval: { type: Number, default: 60, min: [0, "Interval cannot be negative."], max: [Number.MAX_SAFE_INTEGER, "Interval is too high."] },
+    authentication: { type: HTTPAuthenticationSchema, required: false }
 }, { _id: true })
 
 export const ServiceHealth = defineMongooseModel<IServiceHealth>('Service', ServiceHealthSchema)
