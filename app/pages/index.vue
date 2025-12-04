@@ -4,8 +4,8 @@
     <div class="status-page">
       <div class="header">
         <div class="status-title">
-          <h1>Status page</h1>
-          <UptimeIndicator status="partially-out" />
+          <h1>{{ pageInfo.title }}</h1>
+          <UptimeIndicator status="operational" />
         </div>
         <div class="status-info">
           <h1 class="tiny-font">{{ (overallUptime * 100).toFixed(2) }}%</h1>
@@ -13,26 +13,23 @@
         </div>
       </div>
       <div class="statuses">
-        
-        <StatusGroup title="🇵🇱 Poland">
-          <StatusBox title="Email" :uptime="testUptime" :status="Status.OPERATIONAL" slug="pl-email" :data="[...generateRandomTestData()]" />
-          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" slug="pl-vpn" :data="[...generateRandomTestData()]" />
-        </StatusGroup>
-
-        <StatusGroup title="🇷🇴 Romania">
-          <StatusBox title="VPN" :uptime="testUptime" :status="Status.PARTIALLY_OUT" slug="ro-vpn" :data="[...generateRandomTestData()]" />
-        </StatusGroup>
-
-        <StatusGroup title="🇸🇪 Sweden">
-          <StatusBox title="uwu.so" :uptime="testUptime" :status="Status.OPERATIONAL" slug="uwu-so" :data="[...generateRandomTestData()]" />
-          <StatusBox title="thighs.moe" :uptime="testUptime" :status="Status.COMPLETELY_OUT" slug="thighs-moe" :data="[...generateRandomTestData()]" />
-          <StatusBox title="mishashto.com" :uptime="testUptime" :status="Status.OPERATIONAL" slug="mishashto-com" :data="[...generateRandomTestData()]" />
+        <div v-if="pageInfo.groups.length < 1"><p>There is no services yet! :(</p></div>
+        <StatusGroup v-for="statusGroup in pageInfo.groups" :key="statusGroup.slug" :title="statusGroup.displayName">
+          <StatusBox
+          v-for="service in statusGroup.services"
+          :key="service.slug"
+          :slug="service.slug"
+          :title="service.displayName"
+          :status="Status.OPERATIONAL"
+          :uptime="testUptime"
+          :data="[...generateRandomTestData()]" />
         </StatusGroup>
       </div>
       <!-- footer -->
       <div class="footer">
         <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
-        <div v-if="props.configuration['site.footer'] != ''" v-html="props.configuration['site.footer']" />
+        <div v-if="props.configuration['site.footer'] != '' && !pageInfo.footerOverride" v-html="props.configuration['site.footer']" />
+        <div v-if="pageInfo.footerOverride" v-html="pageInfo.footerOverride" />
       </div>
     </div>
   </div>
@@ -49,9 +46,15 @@ const props = defineProps(['configuration']);
 const {data: versionData} = await useFetch('/api/version');
 
 let hostname = useRequestURL().hostname;
-console.log(`GETTING DATA FOR ${hostname} ${appConfig.defaultDomain == hostname ? '(default)' : ''}`);
+
+const {data: pageInfo} = await useFetch('/api/v1/page/', {
+  query: {
+    cname: hostname
+  }
+});
 
 useHead({
+  titleTemplate: `${pageInfo.value.name} - %s`,
   title: "status"
 });
 
