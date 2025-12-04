@@ -57,6 +57,7 @@ useHead({
   title: "status"
 });
 
+// TODO: Replace this with real data
 let overallUptime = 0.938464;
 let testUptime = 0.9933449;
 
