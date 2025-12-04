@@ -1,5 +1,4 @@
-import { defineMongooseModel } from '#nuxt/mongoose'
-import { Schema, Document, CallbackError } from 'mongoose'
+import mongoose, { Schema, Document, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 
 const UserSchema = new Schema<IUser>({
@@ -17,9 +16,8 @@ UserSchema.pre('save', async function(next) {
   try {
     const salt = await bcrypt.genSalt(5)
     user.password = await bcrypt.hash(user.password, salt)
-    next()
   } catch (err) {
-    next(err as CallbackError)
+    throw err;
   }
 })
 
@@ -27,4 +25,4 @@ UserSchema.methods.comparePassword = async function(candidatePassword: string): 
   return bcrypt.compare(candidatePassword, this.password)
 }
 
-export const User = defineMongooseModel<IUser>('User', UserSchema)
+export const User = (mongoose.models.User || model<IUser>('User', UserSchema)) as typeof mongoose.models.User
