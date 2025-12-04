@@ -27,7 +27,7 @@
       </div>
       <!-- footer -->
       <div class="footer">
-        <div><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
+        <div v-if="!props.configuration['site.hide_miyuki']"><span>powered by <a href="https://github.com/LMNYX/miyuki">miyuki</a> v{{ versionData?.version }}</span></div>
         <div v-if="props.configuration['site.footer'] != '' && !pageInfo.footerOverride" v-html="props.configuration['site.footer']" />
         <div v-if="pageInfo.footerOverride" v-html="pageInfo.footerOverride" />
       </div>
