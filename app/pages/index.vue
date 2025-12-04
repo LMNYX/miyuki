@@ -38,7 +38,6 @@
 <script lang="ts" setup>
 import { Status } from '~/utils/status';
 import { generateRandomTestData } from '~/utils/testData';
-const appConfig = useAppConfig() 
 
 // eslint-disable-next-line vue/require-prop-types
 const props = defineProps(['configuration']);
