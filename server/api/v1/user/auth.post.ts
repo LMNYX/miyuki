@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  const isPasswordCorrect = userCard.comparePassword(password);
+  const isPasswordCorrect = await userCard.comparePassword(password);
 
   if (!isPasswordCorrect) {
     return sendError(
