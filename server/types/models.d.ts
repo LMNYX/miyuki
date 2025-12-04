@@ -68,4 +68,16 @@ declare global
         services: IService[],
         managers: IUser[]
     }
+
+    interface IStatusPage
+    {
+        slug: string,
+        name: string,
+        title: string,
+        managers: IUser[],
+        tags: ITag[],
+        groups: IServiceGroup[],
+        cname: string,
+        footerOverride: string | null
+    }
 }
