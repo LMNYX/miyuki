@@ -1,4 +1,5 @@
 import { Configuration } from '~~/server/models/configuration.schema'
+import { Page } from '~~/server/models/page.schema'
 
 export default defineNitroPlugin(async (nitroApp) => {
     const { defaultConfig } = await import('../config/defaults');
@@ -12,4 +13,20 @@ export default defineNitroPlugin(async (nitroApp) => {
             }
         }))
     );
+
+    await Page.updateOne(
+    { slug: 'default' },
+    {
+        $setOnInsert: {
+            name: 'Default',
+            title: 'Status Page',
+            managers: [],
+            tags: [],
+            groups: [],
+            cname: '',
+            footerOverride: ''
+        }
+    },
+    { upsert: true }
+    )
 })
