@@ -356,6 +356,38 @@ html, body
     }
 }
 
+input {
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  padding: 8px;
+  margin: 8px 0;
+  outline: none;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: 0.2s;
+  will-change: border-radius;
+
+  &:focus {
+    border-radius: 12px;
+  }
+}
+
+
+button {
+  padding: 8px 16px;
+  background: transparent;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  will-change: border-radius;
+  transition: 0.2s;
+
+  &:hover {
+    border-radius: 12px;
+  }
+}
 
 .TooltipContent {
   z-index: 999999;
