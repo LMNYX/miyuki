@@ -1,6 +1,6 @@
 <template>
   <NuxtLink :to="props.link">
-    <div class="dashboard-link-content"><Icon :name="props.icon ?? 'pixelarticons:forward'" class="dashboard-icon" /><span>{{ props.text ?? 'Link' }}</span></div>
+    <div class="dashboard-link-content"><Icon :name="props.icon ?? 'pixelarticons:forward'" class="dashboard-icon" /><span class="title">{{ props.text ?? 'Link' }}</span></div>
   </NuxtLink>
 </template>
 
@@ -45,6 +45,12 @@ a
   span
   {
     vertical-align: middle;
+
+    &.title
+    {
+      display: inline-block;
+      transform: translateY(-1px);
+    }
 
     &.dashboard-icon
     {

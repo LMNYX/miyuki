@@ -35,6 +35,14 @@ declare global
         DNS
     }
 
+    enum UserAccessLevel
+    {
+        USER = 0,
+        EDITOR = 30,
+        ADMIN = 60,
+        SUPERADMIN = 90
+    }
+
     interface IServiceHealth {
         method: ServiceHeartbeatMethod,
         url: string,
