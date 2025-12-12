@@ -93,6 +93,9 @@ const tryAuthorize = async () => {
 const logout = async () =>
 {
   auth.setSession(null);
+  const authCookie = useCookie('auth_token')
+  authCookie.value = null
+  window.location.reload();
 }
 </script>
 
