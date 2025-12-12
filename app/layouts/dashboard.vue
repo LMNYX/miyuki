@@ -43,7 +43,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '~/stores/auth'
-
+useHead({ title: "dashboard" });
 const auth = useAuthStore()
 const authReady = ref(false)
 

@@ -23,7 +23,7 @@ useHead({
 <style lang="scss">
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.21s;
+  transition: all 0.11s;
 }
 .page-enter-from,
 .page-leave-to {

@@ -57,7 +57,7 @@ onMounted(() => {
 <style lang="scss">
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.11s;
+  transition: all 0.09s;
 }
 .page-enter-from,
 .page-leave-to {
