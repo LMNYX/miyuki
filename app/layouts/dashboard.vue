@@ -12,6 +12,12 @@
           <DashboardNavButton link="/dashboard/services" icon="pixelarticons:subscriptions" text="services" />
           <DashboardNavButton link="/dashboard/alerts" icon="pixelarticons:modem" text="alerts" />
           <DashboardNavButton link="/dashboard/incidents" icon="pixelarticons:message-delete" text="incidents" />
+          <div class="user-info">
+            <div class="user-wrapper">
+              <span class="username">{{ auth.session?.username }}</span>
+              <button class="logout-button" @click="logout"><Icon name="pixelarticons:logout" /></button>
+            </div>
+          </div>
         </div>
         <slot />
       </div>
@@ -83,6 +89,11 @@ const tryAuthorize = async () => {
     loading.value = false
   }
 }
+
+const logout = async () =>
+{
+  auth.setSession(null);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -126,10 +137,50 @@ const tryAuthorize = async () => {
 
 .navigation-bar
 {
+  position: relative;
   height: 100%;
   width: 17em;
   border-right: 1px solid rgba(255,255,255,0.1);
   margin-right: 24px;
+
+  .user-info
+  {
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255, 0.1);
+    bottom: 0;
+    
+    div.user-wrapper
+    {
+      display: flex;
+      vertical-align: middle;
+      padding: 24px;
+
+      align-items: center;
+
+      span.username
+      {
+        vertical-align: middle;
+        text-align: left;
+      }
+
+      button.logout-button
+      {
+        font-size: 18px;
+        border: 1px solid transparent;
+        border-radius: 0;
+        padding: 4px 8px;
+        vertical-align: middle;
+        margin-left: auto;
+
+        &:hover
+        {
+          background: rgba(0,0,0,0.1);
+          border: 1px solid rgba(255,255,255,0.1);
+        }
+      }
+    }
+  }
 }
 
 .loader-spin {
