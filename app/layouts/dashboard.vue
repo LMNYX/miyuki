@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <slot />
+        <div class="page-wrapper"><slot /></div>
       </div>
     </div>
     <div v-else class="dashboard-login">
@@ -147,6 +147,7 @@ const logout = async () =>
   width: 17em;
   border-right: 1px solid rgba(255,255,255,0.1);
   margin-right: 24px;
+  flex-shrink: 0;
 
   .user-info
   {
@@ -186,6 +187,12 @@ const logout = async () =>
       }
     }
   }
+}
+
+.page-wrapper
+{
+  flex: 1;
+  overflow-y: auto;
 }
 
 .loader-spin {

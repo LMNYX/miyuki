@@ -23,6 +23,7 @@
     "@unhead/vue": "^2.0.19",
     "bcrypt": "^6.0.0",
     "eslint": "^9.39.1",
+    "i2djs": "^5.4.0",
     "mongoose": "^9.0.0",
     "nuxt": "^4.2.1",
     "nuxt-mongoose": "1.0.6",

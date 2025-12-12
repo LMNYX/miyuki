@@ -41,6 +41,9 @@ importers:
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
+      i2djs:
+        specifier: ^5.4.0
+        version: 5.4.0
       mongoose:
         specifier: ^9.0.0
         version: 9.0.0
@@ -3283,6 +3286,10 @@ packages:
   human-signals@5.0.0:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
+
+  i2djs@5.4.0:
+    resolution: {integrity: sha512-HLEI3CmYUmWRUVm4QR/7ghrvwkMtN2xM8ilLAZmqpq7YdvDgN59wI120Zj+YUgVOVcS+IwKR4kOUORon43W6VQ==}
+    engines: {node: '>=16.0.0'}
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -9104,6 +9111,8 @@ snapshots:
   human-signals@4.3.1: {}
 
   human-signals@5.0.0: {}
+
+  i2djs@5.4.0: {}
 
   iconv-lite@0.4.24:
     dependencies:
