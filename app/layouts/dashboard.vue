@@ -5,15 +5,24 @@
 
   <div v-else>
     <div v-if="auth.isLoggedIn">
-      <slot />
+      <div class="dashboard-wrapper">
+        <div class="navigation-bar">
+          <DashboardNavButton link="/dashboard" icon="pixelarticons:home" text="overview" />
+          <DashboardNavButton link="/dashboard/pages" icon="pixelarticons:file-multiple" text="pages" />
+          <DashboardNavButton link="/dashboard/services" icon="pixelarticons:subscriptions" text="services" />
+          <DashboardNavButton link="/dashboard/alerts" icon="pixelarticons:modem" text="alerts" />
+          <DashboardNavButton link="/dashboard/incidents" icon="pixelarticons:message-delete" text="incidents" />
+        </div>
+        <slot />
+      </div>
     </div>
     <div v-else class="dashboard-login">
       <div class="login-form">
         <p>Dashboard</p>
         <br>
         <div>
-          <input v-model="username" placeholder="Username" type="text" />
-          <input v-model="password" placeholder="Password" type="password" />
+          <input v-model="username" placeholder="Username" type="text">
+          <input v-model="password" placeholder="Password" type="password">
         </div>
         <br>
         <button :disabled="loading" @click="tryAuthorize">
@@ -103,9 +112,25 @@ const tryAuthorize = async () => {
     text-align: center;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    }
   }
+}
 
+.dashboard-wrapper
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-bar
+{
+  height: 100%;
+  width: 17em;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  margin-right: 24px;
+}
 
 .loader-spin {
   display: inline-block;
