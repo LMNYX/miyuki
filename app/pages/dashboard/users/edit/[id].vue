@@ -3,7 +3,33 @@
     <div class="topbar">
       <button @click="$router.back()"><Icon name="pixelarticons:chevron-left" /></button>
       <p>Editing {{ form.name }}</p>
-      <button class="danger" @click="deleteUser">Delete user</button>
+      <AlertDialogRoot>
+        <AlertDialogTrigger class="danger">
+          Delete user
+        </AlertDialogTrigger>
+        <AlertDialogPortal>
+          <AlertDialogOverlay class="AlertDialogOverlay" />
+          <AlertDialogContent class="AlertDialogContent">
+            <AlertDialogTitle class="AlertDialogTitle">
+              Are you absolutely sure?
+            </AlertDialogTitle>
+            <AlertDialogDescription class="AlertDialogDescription">
+              This action cannot be undone. This will permanently delete this account and remove all the data from the servers.
+            </AlertDialogDescription>
+            <div :style="{ display: 'flex', gap: 25, justifyContent: 'flex-end' }" style="gap: 16px;">
+              <AlertDialogCancel>
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction
+                class="danger"
+                @click="deleteUser"
+              >
+                Yes, delete account
+              </AlertDialogAction>
+            </div>
+          </AlertDialogContent>
+        </AlertDialogPortal>
+      </AlertDialogRoot>
     </div>
 
     <div class="user-editor">
@@ -159,7 +185,6 @@ async function submitChanges() {
 }
 
 async function deleteUser() {
-  if (!confirm('Are you sure you want to delete this user?')) return;
   try {
     await $fetch(`/api/v1/user/delete/${form.value._id}`, { method: 'POST' });
     router.back();
@@ -190,17 +215,17 @@ async function deleteUser() {
       border: 1px solid rgba(255,255,255,0.1);
     }
   }
+}
 
-  button.danger
+button.danger
+{
+  margin-left: auto;
+  background: transparent;
+
+  &:hover
   {
-    margin-left: auto;
-    background: transparent;
-
-    &:hover
-    {
-      border: 1px solid rgba(175, 47, 47, 0.6);
-      background: rgba(175, 47, 47, 0.3);
-    }
+    border: 1px solid rgba(175, 47, 47, 0.6);
+    background: rgba(175, 47, 47, 0.3);
   }
 }
 
@@ -281,6 +306,67 @@ h3 { span { vertical-align: middle; }}
       }
     }
     
+  }
+}
+
+/* rekaui */
+
+.AlertDialogOverlay {
+  background-color: rgba(0,0,0,0.2);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.AlertDialogContent {
+  background-color: rgb(24, 24, 24);
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  padding: 25px;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.AlertDialogContent:focus {
+  outline: none;
+}
+
+.AlertDialogTitle {
+  margin: 0;
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.AlertDialogDescription {
+  margin-bottom: 20px;
+  color: white;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 </style>
