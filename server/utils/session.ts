@@ -5,6 +5,7 @@ import { useStorage } from '#imports'
 export interface SessionData {
   userId: string
   username: string
+  displayName: string,
   access_level: number
 }
 

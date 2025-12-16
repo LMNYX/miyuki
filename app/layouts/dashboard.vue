@@ -16,7 +16,7 @@
           <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 99" link="/dashboard/settings" icon="pixelarticons:save" text="Global settings" />
           <div class="user-info">
             <div class="user-wrapper">
-              <span class="username">{{ auth.session?.username }}</span>
+              <span class="username">{{ auth.session?.displayName }}</span>
               <button class="logout-button" @click="logout"><Icon name="pixelarticons:logout" /></button>
             </div>
           </div>
@@ -98,7 +98,7 @@ const logout = async () =>
   auth.setSession(null);
   const authCookie = useCookie('auth_token')
   authCookie.value = null
-  window.location.reload();
+  window.location.href = "/dashboard";
 }
 </script>
 

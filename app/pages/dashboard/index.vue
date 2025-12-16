@@ -3,7 +3,7 @@
     <div class="dashboard-overview">
       <div class="dashboard-overview1">
         <div class="login-info">
-          <div class="content"><p>Welcome back, {{ auth.session?.username }}!</p></div>
+          <div class="content"><p>Welcome back, {{ auth.session?.displayName }}!</p></div>
         </div>
         <div class="dashboard-card" style="width: 900px">
           <PixelLineChart />

@@ -58,6 +58,7 @@ export default defineEventHandler(async (event) => {
   const tokenUser = await createSession({
     userId: userCard.id,
     username: userCard.username,
+    displayName: userCard.name,
     access_level: userCard.access_level
   });
 

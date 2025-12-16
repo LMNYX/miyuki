@@ -4,6 +4,7 @@ import { ref } from 'vue'
 export interface AuthContext {
   userId: string
   username: string
+  displayName: string
   access_level: number
 }
 
