@@ -26,6 +26,19 @@ export const User = defineMongooseModel({
   name: 'User',
   schema: UserSchema,
   hooks(schema) {
+    schema.pre('save', async function (this: IUser & { isModified: (path: string) => boolean }, next) {
+      if (!this.isModified('password')) return next()
+
+      try {
+        const salt = await bcrypt.genSalt(5)
+        this.password = await bcrypt.hash(this.password, salt)
+        next()
+      } catch (err) {
+        next(err as CallbackError)
+      }
+    })
+
+
     schema.pre('updateOne', async function (next) {
       const update = this.getUpdate() as any
 
