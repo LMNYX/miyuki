@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   let session;
   let offset:number = Number(query.offset);
+  let sort:'asc' | 'desc' = query.offset === 'desc' ? 'desc' : 'asc';
 
   if (isNaN(offset)) offset = 0;
 
@@ -34,9 +35,11 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  const foundUsers = await User.find({}).skip(offset).limit(10).select("-__v -_id -password").sort({'created_at': -1}).lean();
+  const foundUsers = await User.find({}).sort({'created_at': sort}).skip(offset).limit(50).select("-__v -_id -password").lean();
+  const usersCount = await User.countDocuments({});
 
   return {
-    users: foundUsers
+    users: foundUsers,
+    count: usersCount
   }
 })
