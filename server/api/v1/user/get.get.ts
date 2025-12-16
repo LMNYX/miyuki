@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  const foundUsers = await User.find({}).sort({'created_at': sort}).skip(offset).limit(50).select("-__v -_id -password").lean();
+  const foundUsers = await User.find({}).sort({'created_at': sort}).skip(offset).limit(50).select("-__v -password").lean();
   const usersCount = await User.countDocuments({});
 
   return {

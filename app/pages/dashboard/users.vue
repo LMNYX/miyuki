@@ -12,7 +12,7 @@
         <th>Actions</th>
       </tr>
 
-      <tr v-for="(user, index) in users" :key="user.username">
+      <tr v-for="(user, index) in users" :key="user._id">
         <td>{{ rowIndex(index) }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.name }}</td>
