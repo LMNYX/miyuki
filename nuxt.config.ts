@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     'reka-ui/nuxt',
     'nuxt-mongoose',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@vueuse/nuxt'
   ]
 })

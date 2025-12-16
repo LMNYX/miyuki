@@ -21,6 +21,8 @@
     "@pinia/nuxt": "0.11.3",
     "@types/bcrypt": "^6.0.0",
     "@unhead/vue": "^2.0.19",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/nuxt": "14.1.0",
     "bcrypt": "^6.0.0",
     "eslint": "^9.39.1",
     "i2djs": "^5.4.0",
@@ -31,6 +33,7 @@
     "reka-ui": "^2.6.0",
     "sass": "^1.94.2",
     "vue": "^3.5.25",
+    "vue-boring-avatars": "^1.4.0",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
