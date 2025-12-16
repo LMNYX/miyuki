@@ -70,13 +70,12 @@ export default defineEventHandler(async (event) => {
       $set: {
         ...(username && { username }),
         ...(name && { name }),
-        ...(role && { role }),
+        ...(role && { access_level: role }),
         ...(new_password1 && { password: password })
       }
     });
     return { success: true };
   } catch (e) {
-    throw e;
     return sendError(
       event,
       createError({
