@@ -12,8 +12,8 @@
           <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 60" link="/dashboard/services" icon="pixelarticons:subscriptions" text="Services" />
           <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 60" link="/dashboard/alerts" icon="pixelarticons:notification" text="Alerts" />
           <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 30" link="/dashboard/incidents" icon="pixelarticons:alert" text="Incidents" />
-          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 99" link="/dashboard/users" icon="pixelarticons:users" text="User management" />
-          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 99" link="/dashboard/settings" icon="pixelarticons:save" text="Global settings" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 90" link="/dashboard/users" icon="pixelarticons:users" text="User management" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 90" link="/dashboard/settings" icon="pixelarticons:save" text="Global settings" />
           <div class="user-info">
             <div class="user-wrapper">
               <Avatar :name="auth.session?.userId" variant="beam" />
