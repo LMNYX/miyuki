@@ -374,6 +374,11 @@ input, select {
   &:focus {
     border-radius: 12px;
   }
+
+  &:disabled
+  {
+    color: rgba(255,255,255,0.6);
+  }
 }
 
 

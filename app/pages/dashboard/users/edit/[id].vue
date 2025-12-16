@@ -10,6 +10,8 @@
         <div class="avatar-box"><Avatar :size="200" :name="userInfo.user._id" variant="beam" /></div>
       </div>
       <div class="editing">
+        <label for="id">ID</label>
+        <input id="id" :value="userInfo.user._id" readonly disabled>
         <label for="username">Username</label>
         <input id="username" :value="userInfo.user.username">
         <label for="name">Name</label>
