@@ -1,6 +1,5 @@
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(async (to) => {
     const auth = useAuthStore()
-
     const requiredLevel = to.meta.accessLevel as number | undefined
 
     if (
