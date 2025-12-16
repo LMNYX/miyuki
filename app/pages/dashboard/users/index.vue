@@ -11,12 +11,12 @@
 
     <table>
       <tr>
-        <th>&nbsp;</th>
+        <th></th>
         <th>Username</th>
         <th>Name</th>
         <th>Role</th>
         <th>Creation Date</th>
-        <th>&nbsp;</th>
+        <th></th>
       </tr>
       <tr v-if="users.length < 1">
         <td>&nbsp;</td>
