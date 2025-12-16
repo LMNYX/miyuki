@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
     for (const key of keys) {
       if (key.startsWith('session:')) {
         const s = await storage.getItem<SessionData>(key)
-        if (s && s.userId === userId) deleteSession(key);
+        if (s && s.userId === userId) deleteSession(key.substr(8));
       }
     }
 
