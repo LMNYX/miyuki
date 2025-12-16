@@ -1,4 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const args = process.argv.slice(2)
 const [scriptPath, username, name, password, accessLevel] = args
@@ -15,22 +16,14 @@ const UserSchema = new Schema({
     access_level: { type: Number, default: 0, required: true },
     created_at: { type: Date, default: Date.now, required: true }
 }, { timestamps: true })
-UserSchema.pre('save', async function(doc) {
-    const user = this
-    if (!user.isModified('password')) return
 
-    try {
-        const salt = await bcrypt.genSalt(5)
-        user.password = await bcrypt.hash(user.password, salt)
-        } catch (err) {
-    }
-})
-
-UserSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+UserSchema.methods.comparePassword = async function (
+    candidatePassword: string
+): Promise<boolean> {
     return bcrypt.compare(candidatePassword, this.password)
 }
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema)
 
 const mongoUrl = process.env.MONGO_URI || 'mongodb://localhost:27017/miyuki_dev'
 
@@ -45,10 +38,14 @@ async function main() {
         process.exit(1)
     }
 
+    const saltRounds = 5
+    const salt = await bcrypt.genSalt(saltRounds)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
     const user = new User({
         username,
         name,
-        password,
+        password: hashedPassword,
         access_level: accessLevel ? Number(accessLevel) : 0
     })
 
