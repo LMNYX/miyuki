@@ -23,9 +23,9 @@
     </table>
 
     <div class="pagination">
-      <button @click="prevPage" :disabled="page === 1"><Icon name="pixelarticons:chevron-left" /></button>
+      <button :disabled="page === 1" @click="prevPage"><Icon name="pixelarticons:chevron-left" /></button>
       <span>{{ page }} / {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="page === totalPages"><Icon name="pixelarticons:chevron-right" /></button>
+      <button :disabled="page === totalPages" @click="nextPage"><Icon name="pixelarticons:chevron-right" /></button>
     </div>
   </div>
 </template>
