@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   
   const username = body.username ?? null;
   const name = body.name ?? null;
-  const role = parseInt(body.role) ?? null;
+  const role = (parseInt(body.role) ?? null);
   const new_password1 = body.password1 ?? null;
   const new_password2 = body.password2 ?? null;
 
@@ -50,6 +50,17 @@ export default defineEventHandler(async (event) => {
   
   try
   {
+    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,15}$/;
+
+    if(username && !usernameRegex.test(username))
+    {
+      return sendError(
+        event,
+        createError({
+          statusCode: 400,
+          statusMessage: 'Username can only be alphanumeric characters and underscore',
+        }));
+    }
     if ((new_password1 && new_password2) && new_password1 != new_password2)
       return sendError(
         event,
@@ -61,8 +72,19 @@ export default defineEventHandler(async (event) => {
     
     let password;
 
+    
     if(new_password1)
+    {
+      if (new_password1.length < 6)
+        return sendError(
+          event,
+          createError({
+            statusCode: 400,
+            statusMessage: 'Passwords needs to contain 6 or more characters.',
+          })
+      );
       password = new_password1.trim();
+    }
   
     await User.updateOne({
       _id: userId
@@ -70,7 +92,7 @@ export default defineEventHandler(async (event) => {
       $set: {
         ...(username && { username }),
         ...(name && { name }),
-        ...(role && { access_level: role }),
+        ...(role !== null ? { access_level: role } : {}),
         ...(new_password1 && { password: password })
       }
     });
