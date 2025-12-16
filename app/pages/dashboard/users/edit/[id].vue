@@ -11,7 +11,7 @@
       </div>
       <div class="editing">
         <label for="id">ID</label>
-        <input id="id" :value="userInfo.user._id" readonly disabled>
+        <input id="id" :value="userInfo.user._id" class="disabled" readonly @focus="selectAll">
         <label for="username">Username</label>
         <input id="username" :value="userInfo.user.username">
         <label for="name">Name</label>
@@ -27,6 +27,10 @@
         <input id="password" type="password" placeholder="********">
         <label for="password2">Repeat Password</label>
         <input id="password2" type="password" placeholder="********">
+        <label for="createdat">Created</label>
+        <input id="createdat" :value="userInfo.user.createdAt" class="disabled noborder" readonly @focus="selectAll">
+        <label for="changedat">Last Change</label>
+        <input id="changedat" :value="userInfo.user.updatedAt" class="disabled noborder" readonly @focus="selectAll">
         <p><button>Submit changes</button></p>
       </div>
       <div class="editing" />
@@ -50,6 +54,13 @@ useHead({
 })
 
 const {data: userInfo} = await useFetch(`/api/v1/user/fetch/${route.params.id}`, {});
+
+
+function selectAll(event: FocusEvent) {
+  const target = event.target as HTMLInputElement
+  console.log(target);
+  target.select()
+}
 
 </script>
 

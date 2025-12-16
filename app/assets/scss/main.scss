@@ -375,7 +375,13 @@ input, select {
     border-radius: 12px;
   }
 
-  &:disabled
+  &.noborder
+  {
+    border: 1px solid transparent;
+    padding: 8px 0;
+  }
+
+  &:disabled, &.disabled
   {
     color: rgba(255,255,255,0.6);
   }
