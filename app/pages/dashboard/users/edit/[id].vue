@@ -49,6 +49,24 @@
 
         <p v-show="errorMessage != ''" class="error-text">{{ errorMessage }}</p>
       </div>
+
+      <div class="editing">
+        <h3>
+          <span>Sessions</span>
+          <span class="tiny-font info-card">{{ Object.keys(sessions).length }}</span>
+        </h3>
+        <div class="sessions">
+          <div v-for="(session, key) in sessions" :key="key" class="session">
+            <div class="content">
+              <span>Session </span><span>{{ `${key.substr(6, 12)}...` }}</span> <span>from {{ session.started }}</span>
+              <p>{{ session.ipAddress }}</p>
+            </div>
+            <div>
+              <button @click="deleteSession(key)">Kill</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -83,6 +101,28 @@ const form = ref({
 const errorMessage = ref('');
 
 const { data: userInfo } = await useFetch(`/api/v1/user/fetch/${route.params.id}`, {});
+
+const sessions = ref<Record<string, any>>({});
+
+const fetchSessions = async () => {
+  const { data } = await useFetch(`/api/v1/user/session/${route.params.id}`);
+  sessions.value = data.value?.sessions ?? {};
+}
+
+await fetchSessions();
+
+async function deleteSession(sessionKey: string) {
+  try {
+    await $fetch(`/api/v1/user/session/${route.params.id}/${sessionKey}/kill`, { method: 'POST' });
+    sessions.value = Object.fromEntries(
+      Object.entries(sessions.value).filter(([key]) => key !== sessionKey)
+    );
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
 if (userInfo.value?.user) {
   form.value._id = userInfo.value.user._id;
   form.value.username = userInfo.value.user.username;
@@ -203,5 +243,44 @@ async function deleteUser() {
 .error-text
 {
   color: rgb(202, 57, 57);
+}
+
+.info-card
+{
+  vertical-align: middle;
+  padding: 4px 8px;
+  padding-left: 12px;
+  background: rgba(0,0,0,0.1);
+}
+
+h3 { span { vertical-align: middle; }}
+
+.sessions
+{
+  display: block;
+  position: flex;
+  flex-direction: column;
+
+  .session
+  {
+    display: flex;
+    margin: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255, 0.1);
+    align-items: center;
+
+    .content
+    {
+      flex: 1;
+      padding: 24px;
+      
+      p
+      {
+        margin: 0;
+        padding: 0;
+        color: rgba(255,255,255,0.6);
+      }
+    }
+    
+  }
 }
 </style>

@@ -6,7 +6,9 @@ export interface SessionData {
   userId: string
   username: string
   displayName: string,
-  access_level: number
+  access_level: number,
+  ipAddress: string,
+  started: Date,
 }
 
 const storage = useStorage()
@@ -22,4 +24,9 @@ export async function createSession(user: SessionData): Promise<string> {
 export async function getSession(token: string): Promise<SessionData | null> {
   const session = await storage.getItem<SessionData>(`session:${token}`)
   return session || null
+}
+
+export async function deleteSession(token: string): Promise<boolean> {
+  const result = await storage.removeItem(`session:${token}`);
+  return result;
 }

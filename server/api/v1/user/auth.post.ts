@@ -1,4 +1,4 @@
-import { defineEventHandler, readBody, sendError } from 'h3'
+import { defineEventHandler, readBody, sendError, getRequestIP } from 'h3'
 import { User } from '~~/server/models/user.schema'
 
 export default defineEventHandler(async (event) => {
@@ -55,11 +55,15 @@ export default defineEventHandler(async (event) => {
     );
   }
 
+  const ip = getRequestIP(event, { xForwardedFor: true }) ?? '0.0.0.0'
+
   const tokenUser = await createSession({
     userId: userCard.id,
     username: userCard.username,
     displayName: userCard.name,
-    access_level: userCard.access_level
+    access_level: userCard.access_level,
+    started: new Date(),
+    ipAddress: ip
   });
 
   setCookie(event, 'auth_token', tokenUser);
