@@ -8,12 +8,12 @@
       <div class="dashboard-wrapper">
         <div class="navigation-bar">
           <DashboardNavButton link="/dashboard" icon="pixelarticons:home" text="Overview" />
-          <DashboardNavButton link="/dashboard/pages" icon="pixelarticons:file-multiple" text="Pages" />
-          <DashboardNavButton link="/dashboard/services" icon="pixelarticons:subscriptions" text="Services" />
-          <DashboardNavButton link="/dashboard/alerts" icon="pixelarticons:notification" text="Alerts" />
-          <DashboardNavButton link="/dashboard/incidents" icon="pixelarticons:alert" text="Incidents" />
-          <DashboardNavButton link="/dashboard/users" icon="pixelarticons:users" text="User management" />
-          <DashboardNavButton link="/dashboard/settings" icon="pixelarticons:save" text="Global settings" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 60" link="/dashboard/pages" icon="pixelarticons:file-multiple" text="Pages" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 60" link="/dashboard/services" icon="pixelarticons:subscriptions" text="Services" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 60" link="/dashboard/alerts" icon="pixelarticons:notification" text="Alerts" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 30" link="/dashboard/incidents" icon="pixelarticons:alert" text="Incidents" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 99" link="/dashboard/users" icon="pixelarticons:users" text="User management" />
+          <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 99" link="/dashboard/settings" icon="pixelarticons:save" text="Global settings" />
           <div class="user-info">
             <div class="user-wrapper">
               <span class="username">{{ auth.session?.username }}</span>
@@ -53,6 +53,7 @@ const username = ref('')
 const password = ref('')
 const loading = ref(false)
 const error = ref('')
+
 
 onMounted(async () => {
   try {
@@ -193,6 +194,7 @@ const logout = async () =>
 {
   flex: 1;
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 .loader-spin {

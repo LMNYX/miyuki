@@ -4,7 +4,7 @@
     <div>
         <h1>Oopsie, we've hit {{ error.statusCode }}!</h1>
         <p v-if="error?.statusCode === 404">Be careful next time!</p>
-        <p v-else>Be careful next time, but we've already been notified!</p>
+        <p v-else>{{ error?.statusMessage }}</p>
     </div>
   </div>
 </template>

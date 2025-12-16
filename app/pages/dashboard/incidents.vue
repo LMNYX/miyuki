@@ -8,6 +8,8 @@
 import { useAuthStore } from '~/stores/auth'
 
 definePageMeta({
+  middleware: ['require-auth'],
+  accessLevel: 30,
   layout: 'dashboard'
 })
 useHead({ title: "dashboard - incident manager" });

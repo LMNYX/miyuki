@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="dashboard-overview2">
-        <div class="dashboard-void"></div>
+        <div class="dashboard-void" />
         <div>
           <h2>Quickstart Guide</h2>
           <div class="quickstart-steps">
@@ -74,7 +74,9 @@
 import { useAuthStore } from '~/stores/auth'
 
 definePageMeta({
-  layout: 'dashboard'
+  middleware: ['require-auth'],
+  accessLevel: 0,
+  layout: 'dashboard',
 })
 useHead({ title: "dashboard" });
 
@@ -105,6 +107,7 @@ const auth = useAuthStore()
   border: 1px solid rgba(255,255,255, 0.1);
   padding: 24px;
   border-radius: 16px;
+  width: 100%;
 
   &--sub-data
   {
