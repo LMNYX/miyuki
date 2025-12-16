@@ -2,46 +2,59 @@
   <div>
     <div class="topbar">
       <button @click="$router.back()"><Icon name="pixelarticons:chevron-left" /></button>
-      <p>Editing {{ userInfo.user.name }}</p>
-      <button class="danger">Delete user</button>
+      <p>Editing {{ form.name }}</p>
+      <button class="danger" @click="deleteUser">Delete user</button>
     </div>
+
     <div class="user-editor">
       <div class="preview">
-        <div class="avatar-box"><Avatar :size="200" :name="userInfo.user._id" variant="beam" /></div>
+        <div class="avatar-box">
+          <Avatar :size="200" :name="form._id" variant="beam" />
+        </div>
       </div>
+
       <div class="editing">
         <label for="id">ID</label>
-        <input id="id" :value="userInfo.user._id" class="disabled" readonly @focus="selectAll">
+        <input id="id" :value="form._id" class="disabled" readonly @focus="selectAll" />
+
         <label for="username">Username</label>
-        <input id="username" :value="userInfo.user.username">
+        <input id="username" v-model="form.username" />
+
         <label for="name">Name</label>
-        <input id="name" :value="userInfo.user.name">
+        <input id="name" v-model="form.name" />
+
         <label for="role">Role</label>
-        <select id="role">
-          <option value="0" :selected="userInfo.user.access_level < 30">Guest</option>
-          <option value="30" :selected="userInfo.user.access_level >= 30 && userInfo.user.access_level < 60">Editor</option>
-          <option value="60" :selected="userInfo.user.access_level >= 60 && userInfo.user.access_level < 90">Administrator</option>
-          <option value="90" :selected="userInfo.user.access_level >= 90">Owner</option>
+        <select id="role" v-model="form.role">
+          <option value="0">Guest</option>
+          <option value="30">Editor</option>
+          <option value="60">Administrator</option>
+          <option value="90">Owner</option>
         </select>
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="********">
+
+        <label for="password1">Password</label>
+        <input id="password1" type="password" v-model="form.password1" placeholder="********" />
+
         <label for="password2">Repeat Password</label>
-        <input id="password2" type="password" placeholder="********">
+        <input id="password2" type="password" v-model="form.password2" placeholder="********" />
+
         <label for="createdat">Created</label>
-        <input id="createdat" :value="userInfo.user.createdAt" class="disabled noborder" readonly @focus="selectAll">
+        <input id="createdat" :value="form.createdAt" class="disabled noborder" readonly @focus="selectAll" />
+
         <label for="changedat">Last Change</label>
-        <input id="changedat" :value="userInfo.user.updatedAt" class="disabled noborder" readonly @focus="selectAll">
-        <p><button>Submit changes</button></p>
+        <input id="changedat" :value="form.updatedAt" class="disabled noborder" readonly @focus="selectAll" />
+
+        <p>
+          <button @click="submitChanges">Submit changes</button>
+        </p>
       </div>
-      <div class="editing" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import Avatar from 'vue-boring-avatars';
-
-const route = useRoute()
 
 definePageMeta({
   middleware: ['require-auth'],
@@ -49,20 +62,68 @@ definePageMeta({
   layout: 'dashboard'
 })
 
-useHead({
-  title: `users - editing`
-})
+useHead({ title: 'dashboard - users - editing' })
 
-const {data: userInfo} = await useFetch(`/api/v1/user/fetch/${route.params.id}`, {});
+const route = useRoute();
+const router = useRouter();
 
+const form = ref({
+  _id: '',
+  username: '',
+  name: '',
+  role: 0,
+  password1: '',
+  password2: '',
+  createdAt: '',
+  updatedAt: ''
+});
 
-function selectAll(event: FocusEvent) {
-  const target = event.target as HTMLInputElement
-  console.log(target);
-  target.select()
+const { data: userInfo } = await useFetch(`/api/v1/user/fetch/${route.params.id}`, {});
+if (userInfo.value?.user) {
+  form.value._id = userInfo.value.user._id;
+  form.value.username = userInfo.value.user.username;
+  form.value.name = userInfo.value.user.name;
+  form.value.role = userInfo.value.user.access_level;
+  form.value.createdAt = userInfo.value.user.createdAt;
+  form.value.updatedAt = userInfo.value.user.updatedAt;
 }
 
+function selectAll(event: FocusEvent) {
+  const target = event.target as HTMLInputElement;
+  target.select();
+}
+
+async function submitChanges() {
+  const payload: Record<string, any> = {};
+
+  if (form.value.username) payload.username = form.value.username;
+  if (form.value.name) payload.name = form.value.name;
+  if (form.value.role !== null) payload.role = form.value.role;
+  if (form.value.password1?.trim()) payload.password1 = form.value.password1.trim();
+  if (form.value.password2?.trim()) payload.password2 = form.value.password2.trim();
+
+  try {
+    await $fetch(`/api/v1/user/modify/${form.value._id}`, {
+      method: 'POST',
+      body: payload
+    });
+    router.back();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function deleteUser() {
+  if (!confirm('Are you sure you want to delete this user?')) return;
+  try {
+    await $fetch(`/api/v1/user/delete/${form.value._id}`, { method: 'POST' });
+    router.back();
+  } catch (err) {
+    console.error(err);
+  }
+}
 </script>
+
 
 <style lang="scss" scoped>
 .topbar
