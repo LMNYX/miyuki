@@ -19,6 +19,16 @@ Free and Open-source silly opinionated uptime monitor & status page with zero to
 - [ ] gRPC
 - [ ] socket.io
 
+### Dashboard functionality
+
+- [x] User management
+- [ ] Statistics and graphs
+- [ ] Pages
+- [ ] Services
+- [ ] Alerts
+- [ ] Incidents
+- [ ] Global settings
+
 ## Screenshots
 
 <img src="https://uwu.so/eemxA1ZqQki">
