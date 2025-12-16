@@ -23,6 +23,8 @@ Free and Open-source silly opinionated uptime monitor & status page with zero to
 
 <img src="https://uwu.so/eemxA1ZqQki">
 
+<img src="https://uwu.so/eemBPeCt2kg">
+
 ## Setup
 
 For **Miyuki** to work on your machine you need to have MongoDB and NodeJS pre-installed. To simplify deployment and upkeeping proccess use of Docker is recommended.
@@ -56,5 +58,9 @@ For **Miyuki** to work on your machine you need to have MongoDB and NodeJS pre-i
 3. After the container is up you can create a user, using a script:
 
 `docker exec -it miyuki-web-dev pnpm run create-user -- admin "Admin" password 99`
+
+or to create test users run:
+
+`docker exec -it miyuki-web-dev bash scripts/setup-test-data.sh`
 
 4. Go to `/dashboard` and use credentials you specified to login and configure the pages from there.
