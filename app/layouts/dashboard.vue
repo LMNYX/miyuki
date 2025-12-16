@@ -16,6 +16,7 @@
           <DashboardNavButton v-show="(auth.session?.access_level ?? 0) >= 99" link="/dashboard/settings" icon="pixelarticons:save" text="Global settings" />
           <div class="user-info">
             <div class="user-wrapper">
+              <Avatar :name="auth.session?.userId" variant="beam" />
               <span class="username">{{ auth.session?.displayName }}</span>
               <button class="logout-button" @click="logout"><Icon name="pixelarticons:logout" /></button>
             </div>
@@ -45,7 +46,10 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '~/stores/auth'
+import Avatar from 'vue-boring-avatars';
+
 useHead({ title: "dashboard" });
+
 const auth = useAuthStore()
 const authReady = ref(false)
 
@@ -164,6 +168,11 @@ const logout = async () =>
       padding: 24px;
 
       align-items: center;
+
+      svg
+      {
+        margin-right: 12px;
+      }
 
       span.username
       {
