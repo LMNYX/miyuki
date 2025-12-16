@@ -46,6 +46,8 @@
         <p>
           <button @click="submitChanges">Submit changes</button>
         </p>
+
+        <p v-show="errorMessage != ''" class="error-text">{{ errorMessage }}</p>
       </div>
     </div>
   </div>
@@ -78,6 +80,8 @@ const form = ref({
   updatedAt: ''
 });
 
+const errorMessage = ref('');
+
 const { data: userInfo } = await useFetch(`/api/v1/user/fetch/${route.params.id}`, {});
 if (userInfo.value?.user) {
   form.value._id = userInfo.value.user._id;
@@ -109,6 +113,7 @@ async function submitChanges() {
     });
     router.back();
   } catch (err) {
+    errorMessage.value = err.data.statusMessage;
     console.error(err);
   }
 }
@@ -193,5 +198,10 @@ async function deleteUser() {
   {
     background: rgba(0,0,0,0.3);
   }
+}
+
+.error-text
+{
+  color: rgb(202, 57, 57);
 }
 </style>
