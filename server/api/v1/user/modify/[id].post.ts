@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
   const userId = getRouterParam(event, 'id')
   
-  const username = body.username ?? null;
+  let username = body.username ?? null;
   const name = body.name ?? null;
   const role = (parseInt(body.role) ?? null);
   const new_password1 = body.password1 ?? null;
@@ -70,6 +70,8 @@ export default defineEventHandler(async (event) => {
         })
     );
     
+    username = username.toLowerCase();
+
     let password;
 
     
