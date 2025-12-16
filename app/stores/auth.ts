@@ -9,7 +9,7 @@ export interface AuthContext {
 }
 
 export const useAuthStore = defineStore('auth', () => {
-  const session = ref<AuthContext | null>(null)
+  const session = useCookie<AuthContext | null>('session')
   const isLoggedIn = ref(false)
 
   function setSession(data: AuthContext | null) {
