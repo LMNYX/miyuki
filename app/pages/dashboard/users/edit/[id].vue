@@ -21,7 +21,7 @@
           <option value="0" :selected="userInfo.user.access_level < 30">Guest</option>
           <option value="30" :selected="userInfo.user.access_level >= 30 && userInfo.user.access_level < 60">Editor</option>
           <option value="60" :selected="userInfo.user.access_level >= 60 && userInfo.user.access_level < 90">Administrator</option>
-          <option value="90" :selected="userInfo.user.access_level >= 90">Superadministrator</option>
+          <option value="90" :selected="userInfo.user.access_level >= 90">Owner</option>
         </select>
         <label for="password">Password</label>
         <input id="password" type="password" placeholder="********">
