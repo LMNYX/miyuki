@@ -196,26 +196,7 @@ async function deleteUser() {
 
 
 <style lang="scss" scoped>
-.topbar
-{
-  display: flex;
-  align-items: center;
-  width: 95%;
-  padding: 4px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-
-  button:not(.danger)
-  {
-    margin: 0 16px 0 0;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    
-    &:hover
-    {
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-  }
-}
+@use '~/assets/scss/dashboard.scss';
 
 button.danger
 {
@@ -227,47 +208,6 @@ button.danger
     border: 1px solid rgba(175, 47, 47, 0.6);
     background: rgba(175, 47, 47, 0.3);
   }
-}
-
-.user-editor
-{
-  width: 95%;
-  display: flex;
-  margin-top: 24px;
-
-  gap: 24px;
-
-  div.preview
-  {
-    margin: auto;
-  }
-  
-  div.editing
-  {
-    flex: 1;
-    padding: 16px;
-  }
-}
-
-.avatar-box
-{
-  padding: 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.1);
-  cursOr: not-allowed;
-
-  transition: 0.2s;
-
-  &:hover
-  {
-    background: rgba(0,0,0,0.3);
-  }
-}
-
-.error-text
-{
-  color: rgb(202, 57, 57);
 }
 
 .info-card
@@ -306,67 +246,6 @@ h3 { span { vertical-align: middle; }}
       }
     }
     
-  }
-}
-
-/* rekaui */
-
-.AlertDialogOverlay {
-  background-color: rgba(0,0,0,0.2);
-  position: fixed;
-  inset: 0;
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.AlertDialogContent {
-  background-color: rgb(24, 24, 24);
-  border-radius: 6px;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: 500px;
-  max-height: 85vh;
-  padding: 25px;
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.AlertDialogContent:focus {
-  outline: none;
-}
-
-.AlertDialogTitle {
-  margin: 0;
-  color: white;
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.AlertDialogDescription {
-  margin-bottom: 20px;
-  color: white;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-@keyframes overlayShow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes contentShow {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -48%) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
   }
 }
 </style>

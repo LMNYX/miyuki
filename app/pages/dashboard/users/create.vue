@@ -80,28 +80,5 @@ async function submitNewUser() {
 </script>
 
 <style lang="scss" scoped>
-.user-editor
-{
-  width: 95%;
-  display: flex;
-  margin-top: 24px;
-
-  gap: 24px;
-
-  div.preview
-  {
-    margin: auto;
-  }
-  
-  div.editing
-  {
-    flex: 1;
-    padding: 16px;
-  }
-}
-
-.error-text
-{
-  color: rgb(202, 57, 57);
-}
+@use '~/assets/scss/dashboard.scss';
 </style>
