@@ -5,39 +5,42 @@
         <TaggedInput
           v-model="tags"
           v-model:text="search"
-          :allowed-tags="[]"
-          placeholder="Search by username or name"
+          :allowed-tags="['slug', 'manager', 'group', 'domain', 'tag']"
+          placeholder="Search by name or title"
         />
       </div>
       <div class="search-filters">
-        <NuxtLink to="/dashboard/users/create" class="button">New User</NuxtLink>
+        <NuxtLink to="/dashboard/pages/create" class="button">New Page</NuxtLink>
       </div>
     </div>
 
     <table>
       <tr>
         <th></th>
-        <th>Username</th>
         <th>Name</th>
-        <th>Role</th>
+        <th>Slug</th>
+        <th>Managers</th>
         <th>Creation Date</th>
         <th></th>
       </tr>
-      <tr v-if="users.length < 1">
+      <tr v-if="pages.length < 1">
         <td>&nbsp;</td>
-        <td>No users yet!</td>
+        <td>No pages yet!</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
-      <tr v-for="(user, index) in users" :key="user._id">
-        <td><Avatar :name="user._id" variant="beam" /></td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ convertAccessLevelToString(user.access_level) }}</td>
-        <td>{{ user.createdAt }}</td>
-        <td><NuxtLink :to="`/dashboard/users/edit/${user._id}`" class="button">Edit</NuxtLink></td>
+      <tr v-for="(page, index) in pages" :key="page._id">
+        <td><Avatar :name="page._id" variant="marble" /></td>
+        <td>{{ page.name }}</td>
+        <td>{{ page.slug }}</td>
+        <td class="managers-list">
+          <TooltipAvatar v-for="manager in page.managers.splice(0,6)" :key="manager._id" :name="manager._id" :tooltip-content="manager.name" />
+          <span v-show="page.managers.length < 1">None</span>
+        </td>
+        <td>{{ page.createdAt ?? 'Unknown' }}</td>
+        <td><NuxtLink :to="`/dashboard/pages/edit/${page._id}`" class="button">Edit</NuxtLink></td>
       </tr>
     </table>
 
@@ -49,6 +52,8 @@
   </div>
 </template>
 
+
+
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
@@ -56,11 +61,11 @@ import Avatar from 'vue-boring-avatars';
 
 definePageMeta({
   middleware: ['require-auth'],
-  accessLevel: 90,
+  accessLevel: 60,
   layout: 'dashboard'
 })
 
-useHead({ title: 'dashboard - users' })
+useHead({ title: 'dashboard - pages' })
 
 const page = ref(1)
 const limit = 50
@@ -70,9 +75,14 @@ const tags = ref<{ key: string; value: string }[]>([])
 
 const offset = computed(() => (page.value - 1) * limit)
 
-let usersListing = ref<{ users: any[]; count: number }>({ users: [], count: 0 })
+interface PagesResponse {
+  pages: any[]
+  count: number
+}
 
-const fetchUsers = () => useFetch('/api/v1/user/fetch', {
+let pagesListing = ref<PagesResponse>({ pages: [], count: 0 })
+
+const fetchpages = () => useFetch<PagesResponse>('/api/v1/page/fetch', {
   query: {
     offset: offset.value,
     sort: sorting.value,
@@ -82,8 +92,8 @@ const fetchUsers = () => useFetch('/api/v1/user/fetch', {
 })
 
 const refresh = async () => {
-  const { data } = await fetchUsers()
-  usersListing.value = data.value ?? { users: [], count: 0 }
+  const { data } = await fetchpages()
+  pagesListing.value = data.value ?? { pages: [], count: 0 }
 }
 
 watch([page, sorting], () => refresh(), { immediate: true })
@@ -93,9 +103,8 @@ const debouncedSearch = useDebounceFn(() => {
   refresh()
 }, 300)
 watch([search, tags], debouncedSearch)
-
-const users = computed(() => usersListing.value.users)
-const totalCount = computed(() => usersListing.value.count)
+const pages = computed(() => pagesListing.value.pages)
+const totalCount = computed(() => pagesListing.value.count)
 const totalPages = computed(() => Math.ceil(totalCount.value / limit))
 
 function nextPage() {
@@ -106,18 +115,6 @@ function prevPage() {
   if (page.value > 1) page.value--
 }
 
-function rowIndex(index: number) {
-  return sorting.value === 'asc'
-    ? offset.value + index + 1
-    : totalCount.value - offset.value - index
-}
-
-function convertAccessLevelToString(accessLevel: number) {
-  if (accessLevel < 30) return 'Guest'
-  if (accessLevel < 60) return 'Editor'
-  if (accessLevel < 90) return 'Administrator'
-  return 'Owner'
-}
 </script>
 
 
@@ -212,4 +209,14 @@ td:nth-child(1) {
     border-radius: 12px;
   }
 }
+
+td.managers-list ::v-deep svg:not(:first-child) {
+  margin-left: -24px;
+  transition: 0.2s;
+}
+
+td.managers-list:hover ::v-deep svg {
+  margin-left: 0;
+}
+
 </style>
