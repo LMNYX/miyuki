@@ -10,6 +10,6 @@ export const PageSchema = new Schema<IStatusPage>({
     groups: { type: [Schema.Types.ObjectId], ref: 'Group', default: [] },
     cname: { type: String, required: false },
     footerOverride: { type: String, required: false }
-})
+}, { timestamps: true })
 
 export const Page = defineMongooseModel('Page', PageSchema)
