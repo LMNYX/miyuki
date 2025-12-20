@@ -113,7 +113,18 @@ useHead({ title: 'dashboard - users - editing' })
 const route = useRoute();
 const router = useRouter();
 
-const form = ref({
+type UserForm = {
+  _id: string
+  username: string
+  name: string
+  role: number
+  password1: string
+  password2: string
+  createdAt: string
+  updatedAt: string
+}
+
+const form = ref<UserForm>({
   _id: '',
   username: '',
   name: '',
@@ -122,7 +133,9 @@ const form = ref({
   password2: '',
   createdAt: '',
   updatedAt: ''
-});
+})
+
+const originalForm = ref<UserForm | null>(null)
 
 const errorMessage = ref('');
 
@@ -150,12 +163,8 @@ async function deleteSession(sessionKey: string) {
 
 
 if (userInfo.value?.user) {
-  form.value._id = userInfo.value.user._id;
-  form.value.username = userInfo.value.user.username;
-  form.value.name = userInfo.value.user.name;
-  form.value.role = userInfo.value.user.access_level;
-  form.value.createdAt = userInfo.value.user.createdAt;
-  form.value.updatedAt = userInfo.value.user.updatedAt;
+  Object.assign(form.value, userInfo.value.user);
+  originalForm.value = structuredClone(toRaw(form.value))
 }
 
 function selectAll(event: FocusEvent) {
@@ -164,23 +173,27 @@ function selectAll(event: FocusEvent) {
 }
 
 async function submitChanges() {
-  const payload: Record<string, any> = {};
+  if (!originalForm.value) return
 
-  if (form.value.username) payload.username = form.value.username;
-  if (form.value.name) payload.name = form.value.name;
-  if (form.value.role !== null) payload.role = form.value.role;
-  if (form.value.password1?.trim()) payload.password1 = form.value.password1.trim();
-  if (form.value.password2?.trim()) payload.password2 = form.value.password2.trim();
+  const payload = buildPatchPayload(
+    originalForm.value,
+    form.value
+  )
+
+  if (Object.keys(payload).length === 0) {
+    router.back()
+    return
+  }
 
   try {
     await $fetch(`/api/v1/user/modify/${form.value._id}`, {
       method: 'POST',
       body: payload
-    });
-    router.back();
-  } catch (err) {
-    errorMessage.value = err.data.statusMessage;
-    console.error(err);
+    })
+    router.back()
+  } catch (err: any) {
+    errorMessage.value = err?.data?.statusMessage ?? 'Unknown error'
+    console.error(err)
   }
 }
 
