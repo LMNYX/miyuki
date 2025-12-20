@@ -18,8 +18,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  console.log(tags);
-
   if (isNaN(offset)) offset = 0;
 
   try
