@@ -108,12 +108,12 @@ button.danger
 
 }
 
-td.managers-list ::v-deep svg:not(:first-child) {
+td.managers-list:deep(svg:not(:first-child)) {
     margin-left: -24px;
     transition: 0.2s;
 }
 
-td.managers-list:hover ::v-deep svg {
+td.managers-list:hover:deep(svg)  {
     margin-left: 0;
 }
 
