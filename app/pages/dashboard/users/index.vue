@@ -15,30 +15,32 @@
     </div>
 
     <table>
-      <tr>
-        <th></th>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Creation Date</th>
-        <th></th>
-      </tr>
-      <tr v-if="users.length < 1">
-        <td>&nbsp;</td>
-        <td>No users yet!</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr v-for="(user, index) in users" :key="user._id">
-        <td><Avatar :name="user._id" variant="beam" /></td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ convertAccessLevelToString(user.access_level) }}</td>
-        <td>{{ user.createdAt }}</td>
-        <td><NuxtLink :to="`/dashboard/users/edit/${user._id}`" class="button">Edit</NuxtLink></td>
-      </tr>
+      <tbody>
+        <tr>
+          <th></th>
+          <th>Username</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Creation Date</th>
+          <th></th>
+        </tr>
+        <tr v-if="users.length < 1">
+          <td>&nbsp;</td>
+          <td>No users yet!</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr v-for="(user, index) in users" :key="user._id">
+          <td><Avatar :name="user._id" variant="beam" /></td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ convertAccessLevelToString(user.access_level) }}</td>
+          <td>{{ user.createdAt }}</td>
+          <td><NuxtLink :to="`/dashboard/users/edit/${user._id}`" class="button">Edit</NuxtLink></td>
+        </tr>
+      </tbody>
     </table>
 
     <div class="pagination">

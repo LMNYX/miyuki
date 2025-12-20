@@ -15,33 +15,35 @@
     </div>
 
     <table>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Slug</th>
-        <th>Managers</th>
-        <th>Creation Date</th>
-        <th></th>
-      </tr>
-      <tr v-if="pages.length < 1">
-        <td>&nbsp;</td>
-        <td>No pages yet!</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr v-for="(page, index) in pages" :key="page._id">
-        <td><Avatar :name="page._id" variant="marble" /></td>
-        <td>{{ page.name }}</td>
-        <td>{{ page.slug }}</td>
-        <td class="managers-list">
-          <TooltipAvatar v-for="manager in page.managers.splice(0,6)" :key="manager._id" :name="manager._id" :tooltip-content="manager.name" />
-          <span v-show="page.managers.length < 1">None</span>
-        </td>
-        <td>{{ page.createdAt ?? 'Unknown' }}</td>
-        <td><NuxtLink :to="`/dashboard/pages/edit/${page._id}`" class="button">Edit</NuxtLink></td>
-      </tr>
+      <tbody>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Slug</th>
+          <th>Managers</th>
+          <th>Creation Date</th>
+          <th></th>
+        </tr>
+        <tr v-if="pages.length < 1">
+          <td>&nbsp;</td>
+          <td>No pages yet!</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr v-for="(page, index) in pages" :key="page._id">
+          <td><Avatar :name="page._id" variant="marble" /></td>
+          <td>{{ page.name }}</td>
+          <td>{{ page.slug }}</td>
+          <td class="managers-list">
+            <TooltipAvatar v-for="manager in page.managers.splice(0,6)" :key="manager._id" :name="manager._id" :tooltip-content="manager.name" />
+            <span v-show="page.managers.length < 1">None</span>
+          </td>
+          <td>{{ page.createdAt ?? 'Unknown' }}</td>
+          <td><NuxtLink :to="`/dashboard/pages/edit/${page._id}`" class="button">Edit</NuxtLink></td>
+        </tr>
+      </tbody>
     </table>
 
     <div class="pagination">
