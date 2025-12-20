@@ -358,7 +358,7 @@ html, body
     }
 }
 
-input, select {
+input, select, textarea {
   box-sizing: border-box;
   width: 100%;
   display: block;
@@ -370,6 +370,7 @@ input, select {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: 0.2s;
   will-change: border-radius;
+  resize: none;
 
   &:focus {
     border-radius: 12px;
@@ -417,8 +418,13 @@ button {
   will-change: border-radius;
   transition: 0.2s;
 
-  &:hover {
+  &:not(:disabled):hover {
     border-radius: 12px;
+  }
+
+  &:disabled
+  {
+    opacity: 0.7;
   }
 }
 
