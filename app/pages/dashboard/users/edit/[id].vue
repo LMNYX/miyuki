@@ -198,18 +198,6 @@ async function deleteUser() {
 <style lang="scss" scoped>
 @use '~/assets/scss/dashboard.scss';
 
-button.danger
-{
-  margin-left: auto;
-  background: transparent;
-
-  &:hover
-  {
-    border: 1px solid rgba(175, 47, 47, 0.6);
-    background: rgba(175, 47, 47, 0.3);
-  }
-}
-
 .info-card
 {
   vertical-align: middle;

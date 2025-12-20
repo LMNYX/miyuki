@@ -85,9 +85,27 @@ td:nth-child(1) {
     transition: 0.2s;
     text-decoration: none;
 
-    &:hover {
+    &:not(:disabled):hover {
         border-radius: 12px;
     }
+
+    &:disabled
+    {
+        opacity: 0.7;
+    }
+}
+
+button.danger
+{
+    margin-left: auto;
+    background: transparent;
+
+    &:not(:disabled):hover
+    {
+        border: 1px solid rgba(175, 47, 47, 0.6);
+        background: rgba(175, 47, 47, 0.3);
+    }
+
 }
 
 td.managers-list ::v-deep svg:not(:first-child) {
@@ -137,5 +155,36 @@ td.managers-list:hover ::v-deep svg {
     &:hover
     {
         background: rgba(0,0,0,0.3);
+    }
+}
+
+.alert-box
+{
+    padding: 16px;
+    border: 1px solid rgba(255,255,255, 0.1);
+    text-align: left;
+
+    h2
+    {
+        font-size: 21px;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    p
+    {
+        margin: 0;
+    }
+
+    &--info
+    {
+        border: 1px solid rgba(57, 43, 255, 0.2);
+        background: rgba(53, 53, 207, 0.1);
+    }
+
+    &--warn
+    {
+        border: 1px solid rgba(241, 255, 43, 0.2);
+        background: rgba(207, 192, 53, 0.1);
     }
 }
