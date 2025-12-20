@@ -101,7 +101,7 @@ definePageMeta({
   layout: 'dashboard'
 })
 
-useHead({ title: 'dashboard - users - editing' })
+useHead({ title: 'dashboard - pages - editing' })
 
 const route = useRoute();
 const router = useRouter();
