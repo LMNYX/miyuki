@@ -169,22 +169,25 @@ const handleBackspace = () => {
 
 .dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 4px);
   left: 0;
   right: 0;
-  margin-top: 4px;
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   max-height: 240px;
   overflow-y: auto;
   z-index: 10;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
   li {
     display: flex;
     gap: 8px;
     padding: 8px;
     cursor: pointer;
+    list-style: none;
 
     &:hover {
       background: rgba(255, 255, 255, 0.05);
@@ -194,6 +197,7 @@ const handleBackspace = () => {
       width: 32px;
       height: 32px;
       border-radius: 50%;
+      flex-shrink: 0;
     }
 
     .info {
@@ -211,4 +215,5 @@ const handleBackspace = () => {
     }
   }
 }
+
 </style>
