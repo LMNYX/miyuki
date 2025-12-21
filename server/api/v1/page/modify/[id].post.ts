@@ -1,4 +1,5 @@
 import { buildMongoUpdate } from '~~/server/utils/buildMongoUpdate'
+import mongoose from 'mongoose';
 const slugRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,15}$/;
 
 export default defineEventHandler(async (event) => {
@@ -25,7 +26,6 @@ export default defineEventHandler(async (event) => {
   const managers = body.managers !== null ? body.managers : null;
   const groups = body.groups !== null ? body.groups : null;
   const footerOverride = body.footerOverride !== null ? body.footerOverride : '';
-
 
   let session;
   try
@@ -56,6 +56,17 @@ export default defineEventHandler(async (event) => {
   
   try
   {
+    if (body.managers) {
+      body.managers = body.managers.map((u: IUser) => ({
+        _id: new mongoose.Types.ObjectId(u._id),
+        username: u.username,
+        name: u.name
+      }))
+    }
+
+    console.log(body);
+    console.log(body.managers);
+
     const update = buildMongoUpdate(body, {
       slug: {
         trim: true,
@@ -88,7 +99,7 @@ export default defineEventHandler(async (event) => {
       event,
       createError({
         statusCode: 404,
-        statusMessage: 'Page doesn\'t exist.',
+        statusMessage: e.message,
       })
     );
   }

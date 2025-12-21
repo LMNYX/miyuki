@@ -71,6 +71,11 @@
         <label for="changedat">Last Change</label>
         <input id="changedat" :value="form.updatedAt ?? 'Unknown'" class="disabled noborder" readonly @focus="selectAll">
 
+        <label>Managers</label>
+        <UserInput
+        v-model="users"
+        placeholder="Add users..." />
+
         <p>
           <button @click="submitChanges">Submit changes</button>
         </p>
@@ -113,12 +118,22 @@ type PageForm = {
   title: string
   cname: string
   tags: string[]
-  managers: string[]
+  managers: IUser[]
   groups: string[]
   footerOverride: string
   createdAt: string
   updatedAt: string
 }
+
+interface IUser {
+  username: string
+  name: string
+  password: string
+  access_level?: number
+  created_at?: Date
+}
+
+const users = ref<IUser[]>([])
 
 const form = ref<PageForm>({
   _id: '',
@@ -142,7 +157,8 @@ const { data: pageInfo } = await useFetch(`/api/v1/page/fetch/${route.params.id}
 
 if (pageInfo.value?.page) {
   Object.assign(form.value, pageInfo.value.page);
-  originalForm.value = structuredClone(toRaw(form.value))
+  originalForm.value = structuredClone(toRaw(form.value));
+  users.value = form.value.managers ?? [];
 }
 
 function selectAll(event: FocusEvent) {
@@ -153,6 +169,8 @@ function selectAll(event: FocusEvent) {
 async function submitChanges() {
   if (!originalForm.value) return
 
+  form.value.managers = users.value
+  
   const payload = buildPatchPayload(originalForm.value, form.value)
 
   if (Object.keys(payload).length === 0) {
