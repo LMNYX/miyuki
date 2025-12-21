@@ -6,10 +6,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     requiredLevel !== undefined &&
     (auth.session?.access_level ?? 0) < requiredLevel
     ) {
-    throw createError({
-        statusCode: 403,
-        statusMessage: 'You don\'t have enough permissions to access this!',
-        fatal: true,
-    })
+        return navigateTo('/dashboard')
     }
 })
