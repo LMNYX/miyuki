@@ -64,9 +64,6 @@ export default defineEventHandler(async (event) => {
       }))
     }
 
-    console.log(body);
-    console.log(body.managers);
-
     const update = buildMongoUpdate(body, {
       slug: {
         trim: true,
