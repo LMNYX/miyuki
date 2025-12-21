@@ -64,6 +64,24 @@ export default defineEventHandler(async (event) => {
       }))
     }
 
+    if(slug)
+    {
+      const isSlugTaken = await Page.exists({
+        slug: slug
+      });
+
+      if(isSlugTaken)
+      {
+        return sendError(
+          event,
+          createError({
+            statusCode: 400,
+            statusMessage: 'Page with that slug already exists',
+          })
+        );
+      }
+    }
+
     const update = buildMongoUpdate(body, {
       slug: {
         trim: true,

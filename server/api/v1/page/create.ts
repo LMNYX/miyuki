@@ -70,6 +70,21 @@ export default defineEventHandler(async (event) => {
         }));
     }
 
+    const isSlugTaken = await Page.exists({
+      slug: slug
+    });
+
+    if(isSlugTaken)
+    {
+      return sendError(
+        event,
+        createError({
+          statusCode: 400,
+          statusMessage: 'Page with that slug already exists',
+        })
+      );
+    }
+
 
     const result = await Page.create({
       slug: slug,
