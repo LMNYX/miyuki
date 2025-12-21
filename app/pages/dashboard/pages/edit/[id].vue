@@ -65,16 +65,24 @@
         <label for="domain">Domain</label>
         <input id="domain" v-model="form.cname" placeholder="example.com">
 
+        <label
+        for="managers"
+        :style="{
+          display: 'block',
+          marginBottom: '8px'
+        }">Managers</label>
+        <UserInput
+        id="managers"
+        v-model="users"
+        placeholder="Add users..." />
+
+        <br>
+
         <label for="createdat">Created</label>
         <input id="createdat" :value="form.createdAt ?? 'Unknown'" class="disabled noborder" readonly @focus="selectAll">
 
         <label for="changedat">Last Change</label>
         <input id="changedat" :value="form.updatedAt ?? 'Unknown'" class="disabled noborder" readonly @focus="selectAll">
-
-        <label>Managers</label>
-        <UserInput
-        v-model="users"
-        placeholder="Add users..." />
 
         <p>
           <button @click="submitChanges">Submit changes</button>
