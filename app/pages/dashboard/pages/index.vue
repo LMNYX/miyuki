@@ -37,8 +37,8 @@
           <td>{{ page.name }}</td>
           <td>{{ page.slug }}</td>
           <td class="managers-list">
-            <TooltipAvatar v-for="manager in page.managers.splice(0,6)" :key="manager._id" :name="manager._id" :tooltip-content="manager.name" />
-            <span v-show="page.managers.length < 1">None</span>
+            <Avatar v-for="manager in page.managers.slice(0,6)" :key="manager" :name="manager" variant="beam" />
+            <span v-show="page.managers.length === 0">None</span>
           </td>
           <td>{{ page.createdAt ?? 'Unknown' }}</td>
           <td><NuxtLink :to="`/dashboard/pages/edit/${page._id}`" class="button">Edit</NuxtLink></td>
@@ -96,6 +96,7 @@ const fetchpages = () => useFetch<PagesResponse>('/api/v1/page/fetch', {
 const refresh = async () => {
   const { data } = await fetchpages()
   pagesListing.value = data.value ?? { pages: [], count: 0 }
+  console.log(pagesListing.value);
 }
 
 watch([page, sorting], () => refresh(), { immediate: true })
