@@ -23,7 +23,7 @@ Free and Open-source silly opinionated uptime monitor & status page with zero to
 
 - [x] User management
 - [ ] Statistics and graphs
-- [ ] Pages
+- [x] Pages
 - [ ] Services
 - [ ] Alerts
 - [ ] Incidents
