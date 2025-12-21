@@ -35,6 +35,8 @@ Free and Open-source silly opinionated uptime monitor & status page with zero to
 
 <img src="https://uwu.so/eemBPeCt2kg">
 
+<img src="https://uwu.so/eemwLUBpwJn">
+
 ## Setup
 
 For **Miyuki** to work on your machine you need to have MongoDB and NodeJS pre-installed. To simplify deployment and upkeeping proccess use of Docker is recommended.
